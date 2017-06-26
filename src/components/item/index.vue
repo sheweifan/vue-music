@@ -1,0 +1,64 @@
+<template>
+	<div class="item">
+		<div class="img">
+			<img :src="item.pic">
+		</div>
+		<div class="info">
+			<p class="contentTitle">{{item.contentTitle}}</p>
+			<p class="summary">{{item.summary}}</p>
+			<span class="zanTotal">{{item.zanTotal}}</span>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		name: 'item',
+		props: ['item'],
+		beforeMount: function(){
+			// console.log()
+			// this.$props = JSON.parse(this.$props)
+		}
+	}
+</script>
+
+<style>
+	.item{
+		font-size: 0;
+		line-height: 0;
+		border-bottom: 1px solid #e5e5e5;
+		padding: 10px 10px 10px 100px;
+		position: relative;
+	}
+	.img{
+		width: 90px;
+		height: 100%;
+		position: absolute;
+		left: 10px;
+		top: 0;
+		overflow: hidden;
+	}
+	.img img{
+		height: 100%;
+		object-fit: contain;
+	}
+	.info{
+		box-sizing: border-box;
+		padding-left: 10px;
+	}
+	.contentTitle{
+		font-size: 16px;
+		line-height: 1.5;
+		color: #333;
+	}
+	.summary{
+		font-size: 14px;
+		line-height: 1.5;
+		height: 63px;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		overflow: hidden;
+	}
+	
+</style>
