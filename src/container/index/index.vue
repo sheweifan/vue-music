@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<appHeader title="首页"></appHeader>
-		<div class="list" >
+		<div class="list">
 			<item v-for="item in list" :item="item" :key="item.contentId"></item>
 		</div>
 		<div class="loading" v-if="this.pageIndex < this.pageTotal">正在加载中...</div>

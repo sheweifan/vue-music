@@ -13,3 +13,7 @@ new Vue({
 	template: '<App/>',
 	components: { App }
 })
+
+Vue.filter('money', function (value) {
+	return '￥' + parseFloat(value).toFixed(2)
+})
