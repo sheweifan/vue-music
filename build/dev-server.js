@@ -23,6 +23,13 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+
+var apiRoutes = express.Router()
+// app.use('/api', )
+require('./api/index')(apiRoutes);
+
+app.use('/api', apiRoutes)
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -91,3 +98,6 @@ module.exports = {
     server.close()
   }
 }
+
+
+// require('./mock/rank.js')
