@@ -4,7 +4,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import { Swipe, SwipeItem, Lazyload, IndexList, IndexSection } from 'mint-ui'
+import { Swipe, SwipeItem, Lazyload, IndexList, IndexSection, Spinner } from 'mint-ui'
 import router from './router'
 
 Vue.component(Swipe.name, Swipe)
@@ -12,6 +12,7 @@ Vue.component(SwipeItem.name, SwipeItem)
 Vue.use(Lazyload)
 Vue.component(IndexList.name, IndexList)
 Vue.component(IndexSection.name, IndexSection)
+Vue.component(Spinner.name, Spinner)
 
 Vue.config.productionTip = false
 
