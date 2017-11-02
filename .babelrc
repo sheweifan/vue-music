@@ -3,7 +3,7 @@
     ["env", { "modules": false }],
     "stage-2"
   ],
-  "plugins": [["component", [
+  "plugins": ["transform-runtime", ["component", [
     {
       "libraryName": "mint-ui",
       "style": true
