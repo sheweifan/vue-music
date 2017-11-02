@@ -16,7 +16,7 @@ export function getDiscList(){
 }
 
 export function getSongList(disstid){
-  const url = '/api/getDiscList'
+  const url = '/api/getSongList'
   return axios.get(url, {
     params: {
       disstid
