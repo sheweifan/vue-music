@@ -29,16 +29,18 @@ exports.jsonp = (url,params)=>{
         if (typeof ret === 'string') {
           
           // var reg = /^\w+\(({[^()]+})\)$/
-          var reg = /\(([^)]*)\)/
-          var matches = ret.match(reg)
-          if (matches) {
-            ret = JSON.parse(matches[1])
-          }
+          // var reg = /\(([^)]*)\)/
+          // var matches = ret.match(reg)
+          // if (matches) {
+          const leftIdx = ret.indexOf('(')
+          ret = ret.substr(leftIdx+1, ret.length-2-leftIdx)  
+          ret = JSON.parse(ret)
+          // }
           // ret = ret.replace('MusicJsonCallback(', '')
           // ret = ret.substr(0, ret.length-1);
           // ret = JSON.parse(ret)
-
         }
+        ret.success = (ret.code === 0);
         res(ret);
       })
       .catch((e) => {
