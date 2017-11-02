@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import recommend from '@/container/recommend'
 import singer from '@/container/singer'
 import rank from '@/container/rank'
+import songList from '@/container/song-list'
 
 Vue.use(Router)
 
@@ -14,7 +15,13 @@ export default new Router({
 		},
 		{
 			path: '/recommend',
-			component: recommend
+			component: recommend,
+			children: [
+				{
+					path: '/recommend/:id',
+					component: songList
+				}
+			]
 		},
 		{
 			path: '/singer',
