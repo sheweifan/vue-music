@@ -1,0 +1,18 @@
+fixed-page($hasHeader=false)
+  position: fixed
+  right: 0
+  top: $hasHeader ? 50px : 0
+  width: 100%
+  background: #fff
+  bottom: 0
+  overflow-x: hidden
+  overflow-y: auto
+  z-index: 2
+  box-shadow: -5px 0 20px rgba(0,0,0,0.05)
+
+.slide-leave-active,
+.slide-enter-active
+  transition: all .3s
+
+.slide-enter, .slide-leave-to
+  transform: translateX(100%) translateZ(0)
