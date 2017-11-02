@@ -93,3 +93,31 @@ setFormFont()
   font-size: 12px
   line-height: 25px
   height: 25px
+
+
+
+// 箭头
+_setArrow($arrowsize, $borderColor, $borderWidth)
+  display: inline-block
+  height: $arrowsize
+  width: $arrowsize
+  border-width: $borderWidth $borderWidth 0 0
+  border-color: $borderColor
+  border-style: solid
+
+setArrow($direction, $arrowsize, $borderColor, $borderWidth)
+  if $direction==top
+    _setArrow($arrowsize, $borderColor, $borderWidth)
+    transform: matrix(0.71,-0.71,0.71,0.71,0,0) 
+  else if $direction==right
+    _setArrow($arrowsize, $borderColor, $borderWidth)
+    transform: matrix(0.71,0.71,-0.71,0.71,0,0)
+    position: relative
+  else if $direction==down
+    _setArrow($arrowsize, $borderColor, $borderWidth)
+    transform: matrix(-0.71,0.71,-0.71,-0.71,0,0)
+    position: relative
+  else if $direction==left
+    _setArrow($arrowsize, $borderColor, $borderWidth)
+    transform: matrix(-0.71,-0.71,0.71,-0.71,0,0)
+    position: relative
