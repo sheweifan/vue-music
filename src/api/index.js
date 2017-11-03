@@ -79,7 +79,7 @@ export function getSingerList(){
 }
 
 export function getSingerDetail(singermid){
-  const url = '/api/getSingerList'
+  const url = '/api/getSingerDetail'
   return axios.get(url, {
     params: {
       singermid
@@ -91,7 +91,7 @@ export function getSingerDetail(singermid){
 
 // singer
 export function getLyric(songmid){
-  const url = '/api/getSingerList'
+  const url = '/api/getLyric'
   return axios.get(url, {
     params: {
       songmid
