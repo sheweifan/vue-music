@@ -18,18 +18,30 @@ export default new Router({
 			component: recommend,
 			children: [
 				{
-					path: '/recommend/:id',
+					path: ':id',
 					component: songList
 				}
 			]
 		},
 		{
 			path: '/singer',
-			component: singer
+			component: singer,
+			children: [
+				{
+					path: ':id',
+					component: songList
+				}
+			]
 		},
 		{
 			path: '/rank',
-			component: rank
+			component: rank,
+			children: [
+				{
+					path: ':id',
+					component: songList
+				}
+			]
 		}
 	]
 })
