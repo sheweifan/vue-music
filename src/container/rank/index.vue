@@ -1,22 +1,34 @@
 <template lang="pug">
+div
   div.rank-list
-    div.rank-list-item(v-for="(index, item) in list" :key="index")
+    router-link.rank-list-item(tag="div" v-for="item in list" :key="item.id" :to="'/rank/'+ item.id")
       div.img
-        img(src="http://y.gtimg.cn/music/common/upload/iphone_order_channel/toplist_4_300_206379449.jpg")
+        img(v-lazy="item.picUrl")
       ul.list
-        li 1 至少还有你 (Live)-林俊杰
-        li 2 至少还有你 (Live)-林俊杰
-        li 3 至少还有你至少还有你至少还有你至少还有你 (Live)-林俊杰
-
+        li(v-for="(child, index) in item.songList") {{index+1}} 、 {{child.songname}} - {{child.singername}}
+  router-view
 </template>
 
 <script>
+  import { getTopList } from '@/api'
   export default {
     name: 'rank',
     data: function(){
       return {
         list: new Array(10).fill(56)
       }
+    },
+    methods: {
+      _getTopList: async function(){
+        const { success, data } = await getTopList()
+        if (success){
+          const { topList } = data
+          this.list = topList
+        }
+      }
+    },
+    created: function(){
+      this._getTopList()
     }
   }
 </script>
@@ -25,6 +37,7 @@
   @import '../../static/stylus/index.styl'
   .rank-list
     padding-top: $spacing
+    fixed-page(true)
   .rank-list-item
     margin: 0 $spacing $spacing
     border-radius: $radius
