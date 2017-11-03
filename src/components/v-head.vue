@@ -28,7 +28,7 @@
     align-items: center
     box-sizing: border-box
     width: 100%
-    background: rgba(0,0,0,0.8)
+    background: $opacityBg
     &.fixed
       top: 0
       left: 0
@@ -39,10 +39,7 @@
     .goback
       width: $h
       height: $h
-      display: flex
-      justify-content: center
-      align-items: center
-      flex: 0
+      line-height: $h
       &:before
         setArrow(left, 8px, #fff, 2px)
         content: ''
