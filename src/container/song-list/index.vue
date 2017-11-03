@@ -104,13 +104,18 @@
       display: none
     }
     .img
-      height: 260px
+      height: 100vw
       overflow: hidden
   
   .song-list
     padding: $spacing 0
     li
       padding: $spacing
+      position: relative
+      &:after
+        sethalfborderbottom()
+        left: $spacing
+        right: $spacing
     .name
       font-size: $fontSize
       lin-height: 2
