@@ -1,36 +1,62 @@
 <template lang="pug">
 div
-  div.recommend-swiper
-    mt-swipe(:auto="4000")
-      mt-swipe-item
-        img(src="http://y.gtimg.cn/music/common/upload/t_focus_info_iphone/205414.jpg")
-      mt-swipe-item
-        img(src="http://y.gtimg.cn/music/common/upload/t_focus_info_iphone/205414.jpg")
-      mt-swipe-item
-        img(src="http://y.gtimg.cn/music/common/upload/t_focus_info_iphone/205414.jpg")
-  div.recommend-list-tile 热门歌单推荐
-  div.recommend-list
-    router-link.recommend-list-item(tag="div" to="/" v-for="(item, index) in list" :key="index")
-      div.img
-        img(src="http://p.qpic.cn/music_cover/PiajxSqBRaELMiaFiadPqlaJy3Jr1pbibnnP6K9wxOtL7r3y9Qt8vTlibrg/600?n=1?id="+index)
-      div.info
-        p.title bad boy
-        p.desc 昨日的某个遗憾，今天却越来越难以释怀
+  div.recommend-container
+    div.recommend-swiper
+      mt-swipe(:auto="4000")
+        mt-swipe-item(v-for="item in slider" key="item.id")
+          a(:href="item.linkUrl")
+            img(:src="item.picUrl")
+    div.recommend-list-tile 热门歌单推荐
+    div.recommend-list
+      router-link.recommend-list-item(tag="div" :to="'/recommend/'+item.dissid" v-for="item in list" :key="item.dissid")
+        div.img
+          img(:src="item.imgurl")
+        div.info
+          p.title {{item.creator.name}}
+          p.desc {{item.dissname}}
+  router-view
 </template>
 
 <script>
+  import { getRecommend, getDiscList } from '@/api'
 	export default {
 		name: 'recommend',
     data: function(){
       return {
-        list: new Array(10).fill(56)
+        slider: [],
+        list: []
       }
+    },
+    methods: {
+      _getRecommend: async function(){
+        const {success, data} = await getRecommend()
+
+        if (success) {
+          const { slider } = data
+          this.slider = slider
+        }
+      },
+      _getDiscList: async function(){
+        const {success, data} = await getDiscList()
+
+        if (success) {
+          const { list } = data
+          this.list = list
+        }
+      }
+
+    },
+    created: function(){
+      this._getRecommend()
+      this._getDiscList()
     }
   }
 </script>
 
 <style lang="stylus" scoped>
   @import '../../static/stylus/index.styl'
+  .recommend-container
+    fixed-page(true)
   .recommend-swiper
     height: (432/1080*100)vw
   .recommend-list-tile
