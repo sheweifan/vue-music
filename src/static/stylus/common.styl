@@ -8,7 +8,7 @@ fixed-page($hasHeader=false)
   overflow-x: hidden
   overflow-y: auto
   z-index: 2
-  box-shadow: -5px 0 20px rgba(0,0,0,0.05)
+  // box-shadow: -5px 0 20px rgba(0,0,0,0.05)
 
 .slide-leave-active,
 .slide-enter-active
@@ -16,3 +16,7 @@ fixed-page($hasHeader=false)
 
 .slide-enter, .slide-leave-to
   transform: translateX(100%) translateZ(0)
+
+
+image[lazy=loading]
+  backgorund: #000
