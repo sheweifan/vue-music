@@ -56,7 +56,7 @@ div
 <style lang="stylus" scoped>
   @import '../../static/stylus/index.styl'
   .recommend-container
-    fixed-page(true)
+    // fixed-page(true)
   .recommend-swiper
     height: (432/1080*100)vw
   .recommend-list-tile

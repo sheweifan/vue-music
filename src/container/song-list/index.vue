@@ -1,9 +1,10 @@
 <template lang="pug">
   transition(name="slide")
-    div.song-container
+    div(:class="'song-container '+ is")
       v-head(fixed="true" :title="nick")
       div.img
-        img(v-if="logo" :src="logo")
+        img(v-if="logo" v-lazy="logo")
+        span.play-btn 全部播放
       ul.song-list
         li(v-for="item in list" :key="item.songid")
           p.name {{item.songname}}
@@ -50,7 +51,8 @@
       return {
         nick: '',
         logo: '',
-        list: []
+        list: [],
+        is: ''
       }
     },
     methods: {
@@ -75,7 +77,7 @@
       },
       _getMusicList: async function(id){
         const {success, songlist, topinfo} = await getMusicList(id)
-        console.log({success, songlist, topinfo})
+        // console.log({success, songlist, topinfo})
         if (success){
           this.logo = topinfo.pic_v12
           this.nick = topinfo.ListName
@@ -85,13 +87,18 @@
     },
     created: function(){
       const {path, params} = this.$route
+      let is = ''
       if (path.indexOf('recommend') > 0) {
         this._getSongList(params.id)
+        is = 'recommend'
       } else if (path.indexOf('singer') > 0) {
         this._getSingerDetail(params.id)
+        is = 'singer'
       } else if (path.indexOf('rank') > 0) {
         this._getMusicList(params.id)
+        is = 'rank'
       }
+      this.is = is
     }
   }
 </script>
@@ -104,9 +111,21 @@
       display: none
     }
     .img
-      height: 100vw
+      height: 80vw
       overflow: hidden
-  
+      position: relative
+    .play-btn
+      position: absolute
+      bottom: $spacing
+      width: 200px
+      text-align: center
+      background-color: $opacityBg
+      line-height: 1.5
+      padding: $spacing
+      color: #fff
+      border-radius: $radius
+      margin-left: -100px
+      left: 50%
   .song-list
     padding: $spacing 0
     li
