@@ -37,7 +37,7 @@ div
   @import '../../static/stylus/index.styl'
   .rank-list
     padding-top: $spacing
-    fixed-page(true)
+    // fixed-page(true)
   .rank-list-item
     margin: 0 $spacing $spacing
     border-radius: $radius
@@ -51,7 +51,8 @@ div
       height: 100px
     .img
       margin-right: $spacing
-    .list 
+    .list
+      flex: 1
       li
         font-size: $fontSize
         line-height: 1.5
