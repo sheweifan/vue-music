@@ -2,7 +2,9 @@
   div#app
     div.app-tab-brank
     div.app-tab
+      span.left
       tabbar(:data="tab")
+      span.right
     keep-alive
       router-view
 </template>
@@ -45,4 +47,11 @@
     left: 0
     width: 100%
     top: 0
+    display: flex
+    .tabbar
+      flex: 1
+    .left
+      width: 50px
+    .right
+      width: 50px
 </style>
