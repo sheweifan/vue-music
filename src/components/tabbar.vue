@@ -1,31 +1,18 @@
 <template lang="pug">
-- 
-  var obj = [{
-    name: '推荐',
-    link: '/recommend'
-  },{
-    name: '歌手',
-    link: '/singer'
-  },{
-    name: '排行',
-    link: '/rank'
-  }]
-
-div.tabbar
-  each item in obj
-    router-link.tabar-item(tag="div" to=""+item.link)
-      span.tabar-item-info #{item.name} 
+  div.tabbar
+    router-link.tabar-item(v-for="(item, index) in data" :key="index" v-if="item.link" tag="div" :to="item.link")
+      span.tabar-item-info {{item.name}}
 </template>
 
 <script>
   export default {
-    name: 'tabbar'
+    name: 'tabbar',
+    props: ['data']
   }
 </script>
 
 <style lang="stylus" scoped>
   @import '../static/stylus/index.styl'
-  
   .tabbar
     display: flex
     background-color: #fff
@@ -41,6 +28,8 @@ div.tabbar
     &.router-link-active 
       .tabar-item-info
         color: $color
+        transform: scale(1.05)
+        // font-weight: bold
   .tabar-item-info
     color: #666
     font-size: $fontSize

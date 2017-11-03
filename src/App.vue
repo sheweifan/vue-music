@@ -1,7 +1,9 @@
 <template lang="pug">
   div#app
-    tabbar
-    keep-alive(include="/")
+    div.app-tab-brank
+    div.app-tab
+      tabbar(:data="tab")
+    keep-alive
       router-view
 </template>
 
@@ -12,6 +14,35 @@
 		name: 'app',
     components: {
       tabbar
+    },
+    data: function(){
+      return {
+        tab: [
+          {
+            name: '推荐',
+            link: '/recommend'
+          },
+          {
+            name: '歌手',
+            link: '/singer'
+          },
+          {
+            name: '排行',
+            link: '/rank'
+          }
+        ]
+      }
     }
 	}
 </script>
+
+<style lang="stylus" scoped>
+  .app-tab-brank
+    padding-top: 52px
+  .app-tab
+    position: fixed
+    z-index: 1
+    left: 0
+    width: 100%
+    top: 0
+</style>
