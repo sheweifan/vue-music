@@ -16,9 +16,9 @@
   .tabbar
     display: flex
     background-color: #fff
-    position: relative
-    &:before
-      sethalfborderbottom()
+    // position: relative
+    // &:before
+    //   sethalfborderbottom()
       
   .tabar-item
     flex: 1
