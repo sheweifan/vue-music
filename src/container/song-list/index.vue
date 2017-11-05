@@ -1,20 +1,22 @@
 <template lang="pug">
   transition(name="slide")
     div(:class="'song-container '+ is")
+      scroll-view#song-scroll
+        div
+          div.img
+            img(v-if="logo" v-lazy="logo")
+            span.play-btn 全部播放
+          ul.song-list
+            li(v-for="item in list" :key="item.songid")
+              p.name {{item.songname}}
+              p.singer {{item.singer}}
       v-head(fixed="true" :title="nick")
-      div.img
-        img(v-if="logo" v-lazy="logo")
-        span.play-btn 全部播放
-      ul.song-list
-        li(v-for="item in list" :key="item.songid")
-          p.name {{item.songname}}
-          p.singer {{item.singer}}
-        
 </template>
 
 <script>
   import { map } from 'lodash'
   import vHead from '@/components/v-head.vue'
+  import scrollView from '@/components/scroll-view.vue'
   import { getSongList, getSingerDetail, getMusicList } from '@/api'
 
   const newSong = ({singer, songname, songmid, songid, albumname, albummid, interval}) => {
@@ -45,7 +47,8 @@
   export default {
     name: 'song-list',
     components: {
-      vHead
+      vHead,
+      scrollView
     },
     data: function(){
       return {
@@ -107,9 +110,6 @@
   @import '../../static/stylus/index.styl'
   .song-container
     fixed-page()
-    &::-webkit-scrollbar {
-      display: none
-    }
     .img
       height: 80vw
       overflow: hidden
