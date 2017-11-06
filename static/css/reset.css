@@ -91,3 +91,8 @@ img{
     object-fit:cover;
     object-position:center;
 }
+
+body,
+html{
+    font-family: PingFang SC,STHeitiSC-Light,Helvetica-Light,arial,sans-serif;
+}
