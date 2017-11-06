@@ -7,13 +7,14 @@
             img(v-if="logo" v-lazy="logo")
             span.play-btn 全部播放
           ul.song-list
-            li(v-for="item in list" :key="item.songid")
+            li(v-for="(item, index) in list" :key="item.songid" @click="list_play(item, index)")
               p.name {{item.songname}}
               p.singer {{item.singer}}
       v-head(fixed="true" :title="nick")
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   import { map } from 'lodash'
   import vHead from '@/components/v-head.vue'
   import scrollView from '@/components/scroll-view.vue'
@@ -86,7 +87,16 @@
           this.nick = topinfo.ListName
           this.list = rankFormater(songlist)
         }
-      }
+      },
+      list_play(item, index){
+        this.play({
+          list: this.list,
+          index
+        })
+      },
+      ...mapActions([
+        'play'
+      ])
     },
     created: function(){
       const {path, params} = this.$route
