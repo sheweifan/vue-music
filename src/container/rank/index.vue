@@ -15,7 +15,7 @@ div
     name: 'rank',
     data: function(){
       return {
-        list: new Array(10).fill(56)
+        list: []
       }
     },
     methods: {
