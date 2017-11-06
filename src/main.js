@@ -6,6 +6,7 @@ import Vue from 'vue'
 import App from './App'
 import { Swipe, SwipeItem, Lazyload, IndexList, IndexSection, Spinner } from 'mint-ui'
 import router from './router'
+import store from './store'
 
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
@@ -20,10 +21,7 @@ Vue.config.productionTip = false
 new Vue({
 	el: '#app',
 	router,
+  store,
 	template: '<App/>',
 	components: { App }
-})
-
-Vue.filter('money', function (value) {
-	return '￥' + parseFloat(value).toFixed(2)
 })
