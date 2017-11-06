@@ -10,7 +10,11 @@
     name: 'scroll-view',
     props: ['id'],
     mounted: function(){
-      this.scroll = new IScroll('#' + this.id, { scrollX: false, freeScroll: true })
+      this.scroll = new IScroll('#' + this.id, {
+        scrollX: false,
+        freeScroll: true,
+        preventDefault: false
+      })
     },
     updated: function () {
       this.$nextTick(() => {
