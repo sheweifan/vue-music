@@ -5,9 +5,9 @@
         div
           div.img
             img(v-if="logo" v-lazy="logo")
-            span.play-btn 全部播放
+            span.play-btn(@click="list_play(0, true)") 全部播放
           ul.song-list
-            li(v-for="(item, index) in list" :key="item.songid" @click="list_play(item, index)")
+            li(v-for="(item, index) in list" :key="item.songid" @click="list_play(index)")
               p.name {{item.songname}}
               p.singer {{item.singer}}
       v-head(fixed="true" :title="nick")
@@ -19,6 +19,7 @@
   import vHead from '@/components/v-head.vue'
   import scrollView from '@/components/scroll-view.vue'
   import { getSongList, getSingerDetail, getMusicList } from '@/api'
+  import { playMode } from '@/config'
 
   const newSong = ({singer, songname, songmid, songid, albumname, albummid, interval}) => {
     return {
@@ -88,10 +89,11 @@
           this.list = rankFormater(songlist)
         }
       },
-      list_play(item, index){
+      list_play(index, isall = false){
         this.play({
           list: this.list,
-          index
+          index,
+          ...(isall ? {mode: playMode.order} : {})
         })
       },
       ...mapActions([
