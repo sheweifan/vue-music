@@ -1,5 +1,5 @@
-import mode from './mode'
+import playMode from './playMode'
 
 export {
-  mode
+  playMode
 }
