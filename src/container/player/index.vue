@@ -1,10 +1,6 @@
 <template lang="pug">
   div(v-show="playList.length>0")
-    transition(name="screen" 
-                @enter="enter"
-                @leave="leave"
-                @after-enter="afterEnter"
-                @after-leave="afterLeave")
+    screenAnimate(img="playerImg")
       div.player-container(v-show="playScreen")
         div.player-head
           span.player-back(@click="hide")
@@ -12,146 +8,235 @@
           p.name {{playSong.singer}}
         div.player-body
           div.inner
-            div.img(ref="playerImg")
-              img(:src="playSong.picUrl")
+            div#playerImg.img(ref="playerImg")
+              img(:class="(playing ? 'play' : 'pause')" :src="playSong.picUrl")
             scrollView.lyric#player-lyric
               p.lyric-item hehehehehe
               p.lyric-item hehehehehe
               p.lyric-item.active hehehehehe
               p.lyric-item hehehehehe
         div.player-control
-          icon.player-icon(name="icon-5")
-          //- icon(name="icon-6")
-          //- icon(name="icon-8")
-          div.plays
-            icon.player-icon(name="icon-3")
-            icon.player-icon.play(name="icon-1")
-            //- icon(name="icon-4")
-            icon.player-icon(name="icon-2")
-          icon.player-icon(name="icon-10")
+          div.player-range
+            span.start {{ nowTime | songTime }}
+            vue-slider(
+              class="range"
+              v-model="nowTime" 
+              :min="0" 
+              :max="playSong.interval" 
+              :tooltip="false"
+              :height="3" 
+              :process-style="{background:'#01b37e'}"
+              :clickable="false" 
+              @drag-start="rangeDragStart"
+              @drag-end="rangeDragEnd"
+            )
+            span.end {{ playSong.interval | songTime }}
+          div.inner
+            icon.player-icon(:name="modeIcon" @click="modeChange")
+            //- icon(name="icon-6")
+            //- icon(name="icon-8")
+            div(:class="audioReady ? 'plays ready': 'plays' ")
+              icon.player-icon(name="icon-3" @click="prev")
+              icon.player-icon.play(:name="playIcon" @click="togglePlay")
+              //- icon(name="icon-4")
+              icon.player-icon(name="icon-2" @click="next")
+            icon.player-icon(name="icon-10")
     transition(name="slideTop")
       div.player-mini(v-show="!playScreen" @click="show")
-        div.img
+        div.progress
+          div.inner(:style="'width:'+ (nowTime/playSong.interval*100) +'%'")
+        div(:class="'img '+ (playing ? 'play' : 'pause')")
           img(:src="playSong.picUrl")
         div.info
           p.title {{playSong.songname}}
           p.name {{playSong.singer}}
         div.btns
-          icon.player-icon(name="icon-1")
+          i(@click.stop="togglePlay")
+            icon.player-icon(:name="playIcon")
           icon.player-icon(name="icon-9")
-    audio(:src="playSong.url" @play="play" ref="audio")
+    audio(
+      :src="playSong.url"
+      ref="audio"
+      @play="audioPlay"
+      @canplay="canplay"
+      @timeupdate="timeupdate"
+      @ended="ended"
+    )
 </template>
 
 <script>
   import {mapGetters, mapActions} from 'vuex'
+  import vueSlider from 'vue-slider-component'
+  import { isEqual } from 'lodash'
   import icon from '@/components/icon'
   import scrollView from '@/components/scroll-view'
+  import { getLyric } from '@/api'
+  import { playMode } from '@/config'
 
-  const getAnimateData = () => {
-    const winW = window.innerWidth
-    const winH = window.innerHeight
-    const miniLeft = 10
-    const miniBottom = 10
-    const miniWidth = 48
-    const bigTop = 65
-    const bigWidth = winW * 0.8
-    const x = -bigWidth / 2 - miniLeft / 2
-    const y = winH - bigTop - bigWidth / 2 - miniBottom - miniWidth / 2
-    const scale = miniWidth / bigWidth
-    return {
-      x,
-      y,
-      scale
-    }
-  }
-
-  const setAnimate = (el, {x, y, scale}, time = 0.3) => {
-    return new Promise((resolve, reject) => {
-      el.style.webkitTransform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`
-      el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`
-      el.style.webkitTransition = `transform ${time}s`
-      el.style.transition = `transform ${time}s`
-
-      // el.addEventListener('transitionend', resolve)
-      setTimeout(() => {
-        resolve()
-        // el.style.transition = ` `
-        // el.style.webkitTransition = ` `
-      }, time * 1000)
-    })
-  }
+  import screenAnimate from './screen-animate'
 
   export default {
     name: 'player',
     components: {
       icon,
-      scrollView
+      scrollView,
+      screenAnimate,
+      vueSlider
+    },
+    filters: {
+      // 时间戳转mm:ss格式
+      songTime(val){
+        let m = parseInt(val / 60)
+        let s = parseInt(val % 60)
+        m = m < 10 ? '0' + m : m
+        s = s < 10 ? '0' + s : s
+        return m + ':' + s
+      }
     },
     data: function(){
       return {
-        list: []
+        // 音频准备就绪
+        audioReady: false,
+        // 现在播放进度时间戳
+        nowTime: 0
       }
     },
     computed: {
+      // 拿到播放的icon
+      playIcon(){
+        return this.playing ? 'icon-4' : 'icon-1'
+      },
+      // 拿到模式的icon
+      modeIcon(){
+        const nowMode = this.playMode
+
+        if (nowMode === playMode.order){
+          return 'icon-6'
+        }
+
+        if (nowMode === playMode.random){
+          return 'icon-8'
+        }
+
+        if (nowMode === playMode.loop){
+          return 'icon-5'
+        }
+      },
       ...mapGetters([
         'playList',
         'playIndex',
         'playMode',
         'playScreen',
         'formatList',
-        'playSong'
+        'playSong',
+        'playing'
       ])
     },
     methods: {
-      enter: async function(dom, done){
-        const el = this.$refs.playerImg
-        const opts = getAnimateData()
-        await setAnimate(el, opts, 0)
-        const opts2 = {
-          x: 0,
-          y: 0,
-          scale: 1.05
-        }
-        await setAnimate(el, opts2, 0.2)
-        const opts3 = {
-          x: 0,
-          y: 0,
-          scale: 1
-        }
-        await setAnimate(el, opts3, 0.05)
-        done()
-      },
-      leave: async function(dom, done){
-        const el = this.$refs.playerImg
-        const opts = getAnimateData()
-        await setAnimate(el, opts, 0.5)
-        done()
-      },
-      afterEnter: function(){
-        const el = this.$refs.playerImg
-        el.style = ''
-      },
-      afterLeave: function(){
-        const el = this.$refs.playerImg
-        el.style = ''
-      },
+      // 隐藏screen
       hide: function(){
-        this.changeScreen(false)
+        this.setScreen(false)
       },
+      // 显示screen
       show: function(){
-        this.changeScreen(true)
+        this.setScreen(true)
+        getLyric(this.playSong.songmid)
+          .then(data => {
+            console.log(data)
+          })
       },
-      play: function(){
-        // console.log(this.$refs.audio)
-        // this.$refs.audio.play()
+      // 播放按钮
+      togglePlay: function(){
+        // if (!this.audioReady) return
+        this.setPlaying(!this.playing)
       },
-      ...mapActions(['changeScreen'])
+      audioPlay: function(){
+        this.setPlaying(true)
+      },
+      // 上一首
+      prev: function(){
+        if (!this.audioReady) return
+        const index = this.playIndex === 0 ? (this.playList.length - 1) : (this.playIndex - 1)
+        this.setPlayIndex(index)
+        this.audioReady = false
+      },
+      // 下一首
+      next: function(){
+        if (!this.audioReady) return
+        const index = this.playIndex === (this.playList.length - 1) ? 0 : (this.playIndex + 1)
+        this.setPlayIndex(index)
+        this.audioReady = false
+      },
+      // 音频就绪
+      canplay: function(){
+        this.audioReady = true
+      },
+      // 音频结束
+      ended: function(){
+        if (this.playMode === playMode.loop){
+          const audio = this.$refs.audio
+          audio.currentTime = 0
+          audio.play()
+        } else {
+          this.next()
+        }
+      },
+      // 音频timeupdate方法
+      timeupdate: function(e){
+        this.nowTime = e.target.currentTime
+      },
+      // Range 拖拽开始
+      rangeDragStart: function(){
+        this.setPlaying(false)
+      },
+      // Range 拖拽结束
+      rangeDragEnd: function(){
+        const audio = this.$refs.audio
+        audio.currentTime = this.nowTime
+        this.setPlaying(true)
+      },
+      // 改变模式
+      modeChange: function(){
+        const nowMode = this.playMode
+        let modec = ''
+        if (nowMode === playMode.order){
+          modec = playMode.random
+        }
+
+        if (nowMode === playMode.random){
+          modec = playMode.loop
+        }
+
+        if (nowMode === playMode.loop){
+          modec = playMode.order
+        }
+
+        this.setPlayMode({
+          mode: modec,
+          index: this.playIndex
+        })
+      },
+      ...mapActions([
+        'setScreen',
+        'setPlaying',
+        'setPlayIndex',
+        'setPlayMode'
+      ])
     },
     watch: {
-      playSong(){
-        // setTimeout(() => {
-          // this.$refs.audio.play()
-        // }, 1000)
+      playSong(newSong, oldSong){
+        if (isEqual(newSong, oldSong)){
+          return
+        }
+        this.$nextTick(() => {
+          this.$refs.audio.play()
+        })
+      },
+      playing(playing){
+        const audio = this.$refs.audio
+        this.$nextTick(() => {
+          audio[playing ? 'play' : 'pause']()
+        })
       }
     }
   }
@@ -198,16 +283,18 @@
     position: absolute
     bottom: 0
     width: 100%
-    display: flex
-    justify-content: space-around
-    align-items: center
-    padding: 0 0 $spacing*2
-    box-sizing: border-box
+    .inner
+      display: flex
+      justify-content: space-around
+      align-items: center
+      padding: 0 0 $spacing*2
     .plays
       color: $color
       display: flex
       align-items: center
-  
+      opacity: 0.5
+      &.ready
+        opacity: 1
   .player-icon
     padding: 0 ($spacing/2)
     &.play
@@ -216,7 +303,7 @@
 
   .player-body
     padding-top: 65px
-    padding-bottom: 80px
+    padding-bottom: 115px
     box-sizing: border-box
     height: 100%
     .inner
@@ -239,7 +326,17 @@
         color: #333
         font-size: 16px
         line-height: 2
-
+  .player-range
+    padding: $spacing
+    display: flex
+    .range
+      flex: 1
+    .start,
+    .end
+      padding: 0 $spacing
+      font-size: 14
+      line-height: 1.25
+      color: #999
   .player-mini
     position: fixed
     bottom: 0
@@ -252,6 +349,15 @@
     box-sizing: border-box
     &:before
       sethalfbordertop()
+    .progress
+      position: absolute
+      left: 0
+      bottom: 0
+      width: 100%
+      height: 2px
+      .inner
+        height: 2px
+        background: $color
     .img,
     .img img
       width: 48px
@@ -272,4 +378,16 @@
       line-height: 1.25
       color: #999
       ellipsisLn(1)
+      
+   @keyframes rotate
+    0%
+      transform: rotate(0)
+    100%
+      transform: rotate(360deg)
+  .player-container .img img,
+  .player-mini .img
+    animation: rotate 20s linear infinite
+    &.pause
+      animation-play-state: paused
+
 </style>
