@@ -33,10 +33,12 @@
               :max="playSong.interval" 
               :tooltip="false"
               :height="3" 
+              :dot-size="20"
               :process-style="{background:'#01b37e'}"
-              :clickable="false" 
+              :clickable="true" 
               @drag-start="rangeDragStart"
               @drag-end="rangeDragEnd"
+              @callback="callback"
             )
             span.end {{ playSong.interval | songTime }}
           div.inner
@@ -73,7 +75,7 @@
   import scrollView from '@/components/scroll-view'
   import { getLyric } from '@/api'
   import { playMode } from '@/config'
-
+  import { base642Lyric } from '@/utils'
   import screenAnimate from './screen-animate'
 
   export default {
@@ -150,13 +152,16 @@
       show: function(){
         this.setScreen(true)
         getLyric(this.playSong.songmid)
-          .then(data => {
-            console.log(data)
+          .then(({success, lyric}) => {
+            if (success){
+              const { lines } = base642Lyric(lyric)
+              console.log(lines)
+            }
           })
       },
       // 播放按钮
       togglePlay: function(){
-        // if (!this.audioReady) return
+        if (!this.audioReady) return
         this.setPlaying(!this.playing)
       },
       audioPlay: function(){
@@ -198,14 +203,18 @@
         this.nowTime = e.target.currentTime
       },
       // Range 拖拽开始
-      rangeDragStart: function(){
+      rangeDragStart: function(e){
         this.setPlaying(false)
       },
       // Range 拖拽结束
-      rangeDragEnd: function(){
+      rangeDragEnd: function(e){
         const audio = this.$refs.audio
         audio.currentTime = this.nowTime
         this.setPlaying(true)
+      },
+      callback: function(e){
+        const audio = this.$refs.audio
+        audio.currentTime = e
       },
       // 改变模式
       modeChange: function(){
