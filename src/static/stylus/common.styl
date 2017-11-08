@@ -1,3 +1,5 @@
+@import './var.styl'
+
 .slide-leave-active,
 .slide-enter-active
   transition: transform 0.3s
@@ -12,21 +14,4 @@
 .slideTop-enter,
 .slideTop-leave-to
   transform: translateY(100%) translateZ(0)
-
-
-.screen-leave-active,
-.screen-enter-active
-  opacity: 1
-  transition: transform 0.3s
-  .player-head,
-  .player-control
-    transition: transform 0.3s ease-in
-.screen-enter,
-.screen-leave-to
-  opacity: 0
-  .player-head
-    transform: translateY(-100%) translateZ(0)
-  .player-control
-    transform: translateY(100%) translateZ(0)
-
 
