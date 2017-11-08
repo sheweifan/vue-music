@@ -13,8 +13,8 @@ export default {
   [types.SET_PLAY_SCREEN](state, bool) {
     state.playScreen = bool
   },
-  [types.SET_FORMAT_LIST](state, list) {
-    state.formatList = list
+  [types.SET_NOMINAL_LIST](state, list) {
+    state.nominalList = list
   },
   [types.SET_PLAYING](state, bool) {
     state.playing = bool

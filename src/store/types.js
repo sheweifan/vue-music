@@ -2,6 +2,6 @@ export const SET_PLAY_LIST = 'SET_PLAY_LIST'
 export const SET_PLAY_INDEX = 'SET_PLAY_INDEX'
 export const SET_PLAY_MODE = 'SET_PLAY_MODE'
 export const SET_PLAY_SCREEN = 'SET_PLAY_SCREEN'
-export const SET_FORMAT_LIST = 'SET_FORMAT_LIST'
+export const SET_NOMINAL_LIST = 'SET_NOMINAL_LIST'
 export const SET_PLAYING = 'SET_PLAYING'
 

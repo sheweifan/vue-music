@@ -6,7 +6,7 @@ export const playMode = state => state.playMode
 
 export const playScreen = state => state.playScreen
 
-export const formatList = state => state.formatList
+export const nominalList = state => state.nominalList
 
 export const playing = state => state.playing
 

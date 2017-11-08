@@ -1,9 +1,9 @@
-import { mode } from '@/config'
+import { playMode } from '@/config'
 export default {
   playList: [],
   playIndex: -1,
-  playMode: mode.order,
+  playMode: playMode.order,
   playScreen: false,
-  formatList: [],
+  nominalList: [],
   playing: false
 }
