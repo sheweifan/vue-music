@@ -7,6 +7,14 @@
           p.title {{playSong.songname}}
           p.name {{playSong.singer}}
         div.player-body
+          audio(
+            ref="audio"
+            :src="playSong.url"
+            @play="audioPlay"
+            @error="error"
+            @timeupdate="timeupdate"
+            @ended="ended"
+          )
           div.inner
             div#playerImg.img(ref="playerImg")
               img(:class="(playing ? 'play' : 'pause')" :src="playSong.picUrl")
@@ -54,14 +62,7 @@
           i(@click.stop="togglePlay")
             icon.player-icon(:name="playIcon")
           icon.player-icon(name="icon-9")
-    audio(
-      :src="playSong.url"
-      ref="audio"
-      @play="audioPlay"
-      @canplay="canplay"
-      @timeupdate="timeupdate"
-      @ended="ended"
-    )
+
 </template>
 
 <script>
@@ -132,6 +133,14 @@
         'playing'
       ])
     },
+    created: function(){
+      const f = () => {
+        this.$refs.audio.play()
+        this.$refs.audio.pause()
+        document.removeEventListener('touchstart', f)
+      }
+      document.addEventListener('touchstart', f)
+    },
     methods: {
       // 隐藏screen
       hide: function(){
@@ -151,7 +160,7 @@
         this.setPlaying(!this.playing)
       },
       audioPlay: function(){
-        this.setPlaying(true)
+        this.audioReady = true
       },
       // 上一首
       prev: function(){
@@ -168,9 +177,9 @@
         this.audioReady = false
       },
       // 音频就绪
-      canplay: function(){
-        this.audioReady = true
-      },
+      // canplay: function(){
+      //   this.audioReady = true
+      // },
       // 音频结束
       ended: function(){
         if (this.playMode === playMode.loop){
@@ -180,6 +189,9 @@
         } else {
           this.next()
         }
+      },
+      error: function(){
+        alert(1)
       },
       // 音频timeupdate方法
       timeupdate: function(e){
@@ -232,10 +244,11 @@
           this.$refs.audio.play()
         })
       },
-      playing(playing){
+      playing(newPlaying){
         const audio = this.$refs.audio
         this.$nextTick(() => {
-          audio[playing ? 'play' : 'pause']()
+          const event = newPlaying ? 'play' : 'pause'
+          audio[event]()
         })
       }
     }
@@ -314,6 +327,9 @@
       margin: 0 auto
       border-radius: 50%
       overflow: hidden
+      img
+        width: 100%
+        border-radius: 50%
     .lyric
       background: none
       margin-top: 85%

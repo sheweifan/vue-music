@@ -15,6 +15,7 @@ export const play = ({commit, state}, {list, index, mode = state.playMode}) => {
   commit(types.SET_NOMINAL_LIST, list)
   commit(types.SET_PLAY_INDEX, newIndex)
   commit(types.SET_PLAY_SCREEN, true)
+  commit(types.SET_PLAYING, true)
 }
 
 export const setScreen = ({commit, state}, bool) => {
