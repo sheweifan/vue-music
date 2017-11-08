@@ -78,6 +78,7 @@ img[lazy=loading]{
 
 html, body {
     width: 100%;
+    font-family: PingFang SC,STHeitiSC-Light,Helvetica-Light,arial,sans-serif;
 }
 
 body {
@@ -90,9 +91,4 @@ img{
     width: 100%;
     object-fit:cover;
     object-position:center;
-}
-
-body,
-html{
-    font-family: PingFang SC,STHeitiSC-Light,Helvetica-Light,arial,sans-serif;
 }
