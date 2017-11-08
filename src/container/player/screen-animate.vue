@@ -72,11 +72,17 @@
       },
       afterEnter: function(){
         const el = this.$vnode.context.$refs[this.img]
-        el.style = ' '
+        el.style.webkitTransition = ``
+        el.style.transition = ``
+        el.style.webkitTransform = ``
+        el.style.transform = ``
       },
       afterLeave: function(){
         const el = this.$vnode.context.$refs[this.img]
-        el.style = ' '
+        el.style.webkitTransition = ``
+        el.style.transition = ``
+        el.style.webkitTransform = ``
+        el.style.transform = ``
       }
     }
   }
