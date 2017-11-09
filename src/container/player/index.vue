@@ -18,11 +18,15 @@
           div.inner
             div#playerImg.img(ref="playerImg")
               img(:class="(playing ? 'play' : 'pause')" :src="playSong.picUrl")
-            scrollView.lyric#player-lyric
-              p.lyric-item hehehehehe
-              p.lyric-item hehehehehe
-              p.lyric-item.active hehehehehe
-              p.lyric-item hehehehehe
+            scrollView.lyric#player-lyric(ref="lyric")
+              div.lyric-list
+                p.lyric-item(v-if="lyric.length === 0") 正在获取歌词
+                p(
+                  v-else
+                  v-for="(item, index) in lyric"
+                  :class="(lyricIndex===index) ? 'lyric-item active' : 'lyric-item'"
+                  :ket="index"
+                ) {{item.txt}}
         div.player-control
           div.player-range
             span.start {{ nowTime | songTime }}
@@ -38,7 +42,7 @@
               :clickable="true" 
               @drag-start="rangeDragStart"
               @drag-end="rangeDragEnd"
-              @callback="callback"
+              @callback="rangeChange"
             )
             span.end {{ playSong.interval | songTime }}
           div.inner
@@ -70,7 +74,7 @@
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import vueSlider from 'vue-slider-component'
-  import { isEqual } from 'lodash'
+  import { isEqual, findIndex } from 'lodash'
   import icon from '@/components/icon'
   import scrollView from '@/components/scroll-view'
   import { getLyric } from '@/api'
@@ -101,7 +105,8 @@
         // 音频准备就绪
         audioReady: false,
         // 现在播放进度时间戳
-        nowTime: 0
+        nowTime: 0,
+        lyric: []
       }
     },
     computed: {
@@ -125,25 +130,43 @@
           return 'icon-5'
         }
       },
+      lyricIndex(){
+        const nowTime = this.nowTime
+        const lyric = this.lyric
+        const idx = findIndex(lyric, function(item, index){
+          return item.time > nowTime
+        })
+        return Math.max(0, idx - 1)
+      },
       ...mapGetters([
         'playList',
         'playIndex',
         'playMode',
         'playScreen',
-        'formatList',
         'playSong',
         'playing'
       ])
     },
     created: function(){
+      // 黑科技
       const f = () => {
         this.$refs.audio.play()
         this.$refs.audio.pause()
         document.removeEventListener('touchstart', f)
+        console.log('play方法没有src报的错， 移动端部分浏览器没办法主动播放，必须先摸到屏幕先播放后暂停， 完成其他功能后再处理')
       }
       document.addEventListener('touchstart', f)
     },
     methods: {
+      _getLyric(){
+        getLyric(this.playSong.songmid)
+          .then(({success, lyric}) => {
+            if (success){
+              const { lines } = base642Lyric(lyric)
+              this.lyric = lines
+            }
+          })
+      },
       // 隐藏screen
       hide: function(){
         this.setScreen(false)
@@ -151,13 +174,6 @@
       // 显示screen
       show: function(){
         this.setScreen(true)
-        getLyric(this.playSong.songmid)
-          .then(({success, lyric}) => {
-            if (success){
-              const { lines } = base642Lyric(lyric)
-              console.log(lines)
-            }
-          })
       },
       // 播放按钮
       togglePlay: function(){
@@ -212,7 +228,7 @@
         audio.currentTime = this.nowTime
         this.setPlaying(true)
       },
-      callback: function(e){
+      rangeChange: function(e){
         const audio = this.$refs.audio
         audio.currentTime = e
       },
@@ -251,6 +267,7 @@
         }
         this.$nextTick(() => {
           this.$refs.audio.play()
+          this._getLyric()
         })
       },
       playing(newPlaying){
@@ -258,6 +275,16 @@
         this.$nextTick(() => {
           const event = newPlaying ? 'play' : 'pause'
           audio[event]()
+        })
+      },
+      nowTime(){
+        this.$nextTick(() => {
+          const lyric = this.$refs.lyric
+          const oft = lyric.$el.querySelectorAll('.lyric-item')[this.lyricIndex].offsetTop
+          const activeItemH = lyric.$el.querySelector('.lyric-item.active').offsetHeight
+          const outerH = lyric.$el.offsetHeight
+          const top = -oft + outerH / 2 - activeItemH / 2
+          lyric.scroll.scrollTo(0, top, 200)
         })
       }
     }
@@ -347,10 +374,13 @@
       line-height: 1.5
       text-align: center
       color: #999
+      padding: 0 $spacing
       &.active
         color: #333
         font-size: 16px
-        line-height: 2
+        line-height: 1.5
+        padding-top: (16*0.5/2)px
+        padding-bottom: (16*0.5/2)px
   .player-range
     padding: $spacing
     display: flex
