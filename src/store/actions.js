@@ -36,10 +36,10 @@ export const setPlayMode = ({commit, state}, {mode, index = 0, list = state.nomi
   if (mode === playMode.random){
     // 打乱数组
     newList = shuffle(list)
-    const nowPlay = state.playList[index]
-    // 重新找到正在播放的歌曲
-    newIndex = findIndex(newList, {songid: nowPlay.songid})
   }
+  const nowPlay = state.playList[index]
+  // 重新找到正在播放的歌曲
+  newIndex = findIndex(newList, {songid: nowPlay.songid})
   commit(types.SET_PLAY_MODE, mode)
   commit(types.SET_PLAY_INDEX, newIndex)
   commit(types.SET_PLAY_LIST, newList)
