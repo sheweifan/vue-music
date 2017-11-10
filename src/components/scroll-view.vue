@@ -19,7 +19,14 @@
     updated: function () {
       this.$nextTick(() => {
         this.scroll.refresh()
+        setTimeout(() => {
+          this.scroll.refresh()
+        }, 1000)
       })
+    },
+    beforeDestroy: function(){
+      this.scroll.destroy()
+      this.scroll = null
     }
   }
 </script>
