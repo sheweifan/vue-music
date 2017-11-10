@@ -20,7 +20,7 @@
       this.$nextTick(() => {
         this.scroll.refresh()
         setTimeout(() => {
-          this.scroll.refresh()
+          this.scroll && this.scroll.refresh()
         }, 1000)
       })
     },
