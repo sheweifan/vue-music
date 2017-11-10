@@ -1,6 +1,6 @@
 <template lang="pug">
   transition(name="slide")
-    div()
+    div.song-container
       scroll-view#song-scroll(
         ref="page-container"
         :class="'song-container '+ is"
