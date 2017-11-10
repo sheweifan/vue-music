@@ -1,27 +1,31 @@
 <template lang="pug">
     div.app-tab
       span.left
+        icon(name="icon-11")
       tabbar(:data="tab")
       span.right
+        icon(name="icon-7")
 </template>
 
 <script>
   import tabbar from '@/components/tabbar.vue'
+  import icon from '@/components/icon.vue'
   export default {
     name: 'app',
     components: {
-      tabbar
+      tabbar,
+      icon
     },
     data: function(){
       return {
         tab: [
           {
-            name: '推荐',
-            link: '/recommend'
-          },
-          {
             name: '歌手',
             link: '/singer'
+          },
+          {
+            name: '推荐',
+            link: '/recommend'
           },
           {
             name: '排行',
@@ -44,8 +48,19 @@
     background-color: #fff
     .tabbar
       flex: 1
-    .left
-      width: 50px
+      padding: 0 40px
+    .left,
     .right
       width: 50px
+      display: flex
+      justify-content: center
+      align-items: center
+    .left
+      .icon
+        width: 28px
+        height: 28px
+    .right
+      .icon
+        width: 26px
+        height: 26px
 </style>
