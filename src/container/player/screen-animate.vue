@@ -46,7 +46,7 @@
     name: 'sreen-ainimate',
     props: ['img'],
     methods: {
-      enter: async function(dom, done){
+      async enter(dom, done){
         const el = this.$vnode.context.$refs[this.img]
         const opts = getAnimateData()
         await setAnimate(el, opts, 0)
@@ -64,20 +64,20 @@
         await setAnimate(el, opts3, 0.05)
         done()
       },
-      leave: async function(dom, done){
+      async leave(dom, done){
         const el = this.$vnode.context.$refs[this.img]
         const opts = getAnimateData()
         await setAnimate(el, opts, 0.3)
         done()
       },
-      afterEnter: function(){
+      afterEnter(){
         const el = this.$vnode.context.$refs[this.img]
         el.style.webkitTransition = ``
         el.style.transition = ``
         el.style.webkitTransform = ``
         el.style.transform = ``
       },
-      afterLeave: function(){
+      afterLeave(){
         const el = this.$vnode.context.$refs[this.img]
         el.style.webkitTransition = ``
         el.style.transition = ``

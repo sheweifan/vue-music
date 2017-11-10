@@ -57,7 +57,7 @@
       vHead,
       scrollView
     },
-    data: function(){
+    data() {
       return {
         nick: '',
         logo: '',
@@ -66,7 +66,7 @@
       }
     },
     methods: {
-      _getSongList: async function(id){
+      async _getSongList(id){
         const data = await getSongList(id)
         const { success, cdlist } = data
         if (success){
@@ -76,7 +76,7 @@
           this.list = songFormater(songlist)
         }
       },
-      _getSingerDetail: async function(id){
+      async _getSingerDetail(id){
         const { success, data } = await getSingerDetail(id)
         if (success){
           const {list} = data
@@ -85,7 +85,7 @@
           this.list = singerFormater(list)
         }
       },
-      _getMusicList: async function(id){
+      async _getMusicList(id){
         const {success, songlist, topinfo} = await getMusicList(id)
         // console.log({success, songlist, topinfo})
         if (success){
@@ -101,7 +101,7 @@
           ...(isall ? {mode: playMode.order} : {})
         })
       },
-      playListChange: function(playList){
+      playListChange(playList){
         this.setOffsetBottom(this.$refs['page-container'].$el)
         this.$refs['page-container'].scroll.refresh()
       },
@@ -109,7 +109,7 @@
         'play'
       ])
     },
-    created: function(){
+    created(){
       const {path, params} = this.$route
       let is = ''
       if (path.indexOf('recommend') > 0) {

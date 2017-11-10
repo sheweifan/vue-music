@@ -49,25 +49,25 @@ div
   export default {
     mixins: [playListMixin],
     name: 'singer',
-    data: function(){
+    data(){
       return {
         list: {}
       }
     },
     methods: {
-      getSingerList: async function(){
+      async getSingerList(){
         const { data, success } = await getSingerList()
         if (success){
           const { list } = data
           this.list = singerDataFormat(list)
         }
       },
-      playListChange: function(playList){
+      playListChange(playList){
         const h = window.innerHeight - size.appTabHeight - (playList.length === 0 ? 0 : size.miniPlayerHeight)
         this.$refs['mt-index-list'].$el.querySelector('.mint-indexlist-content').style.height = h + 'px'
       }
     },
-    created: function(){
+    created(){
       this.getSingerList()
     }
   }

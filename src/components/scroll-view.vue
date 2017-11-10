@@ -9,14 +9,14 @@
   export default {
     name: 'scroll-view',
     props: ['id'],
-    mounted: function(){
+    mounted(){
       this.scroll = new IScroll('#' + this.id, {
         scrollX: false,
         freeScroll: true,
         preventDefault: false
       })
     },
-    updated: function () {
+    updated(){
       this.$nextTick(() => {
         this.scroll.refresh()
         setTimeout(() => {
@@ -24,7 +24,7 @@
         }, 1000)
       })
     },
-    beforeDestroy: function(){
+    beforeDestroy(){
       this.scroll.destroy()
       this.scroll = null
     }

@@ -97,7 +97,7 @@
         return m + ':' + s
       }
     },
-    data: function(){
+    data(){
       return {
         // 音频准备就绪
         audioReady: false,
@@ -144,7 +144,7 @@
         'playing'
       ])
     },
-    created: function(){
+    created(){
       // 黑科技
       const f = () => {
         this.$refs.audio.play()
@@ -181,14 +181,14 @@
         this.audioReady = true
       },
       // 上一首
-      prev: function(){
+      prev(){
         if (!this.audioReady) return
         const index = this.playIndex === 0 ? (this.playList.length - 1) : (this.playIndex - 1)
         this.setPlayIndex(index)
         this.audioReady = false
       },
       // 下一首
-      next: function(){
+      next(){
         if (!this.audioReady) return
         const index = this.playIndex === (this.playList.length - 1) ? 0 : (this.playIndex + 1)
         this.setPlayIndex(index)
@@ -199,7 +199,7 @@
       //   this.audioReady = true
       // },
       // 音频结束
-      ended: function(){
+      ended(){
         if (this.playMode === playMode.loop){
           const audio = this.$refs.audio
           audio.currentTime = 0
@@ -208,29 +208,29 @@
           this.next()
         }
       },
-      error: function(){
+      error(){
         alert(1)
       },
       // 音频timeupdate方法
-      timeupdate: function(e){
+      timeupdate(e){
         this.nowTime = e.target.currentTime
       },
       // Range 拖拽开始
-      rangeDragStart: function(e){
+      rangeDragStart(e){
         this.setPlaying(false)
       },
       // Range 拖拽结束
-      rangeDragEnd: function(e){
+      rangeDragEnd(e){
         const audio = this.$refs.audio
         audio.currentTime = this.nowTime
         this.setPlaying(true)
       },
-      rangeChange: function(e){
+      rangeChange(e){
         const audio = this.$refs.audio
         audio.currentTime = e
       },
       // 改变模式
-      modeChange: function(){
+      modeChange(){
         const nowMode = this.playMode
         let modec = ''
         if (nowMode === playMode.order){

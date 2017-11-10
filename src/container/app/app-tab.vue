@@ -16,7 +16,7 @@
       tabbar,
       icon
     },
-    data: function(){
+    data(){
       return {
         tab: [
           {

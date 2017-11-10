@@ -17,24 +17,24 @@ div
   export default {
     mixins: [playListMixin],
     name: 'rank',
-    data: function(){
+    data(){
       return {
         list: []
       }
     },
     methods: {
-      _getTopList: async function(){
+      async _getTopList(){
         const { success, data } = await getTopList()
         if (success){
           const { topList } = data
           this.list = topList
         }
       },
-      playListChange: function(playList){
+      playListChange(playList){
         this.setOffsetBottom(this.$refs['page-container'])
       }
     },
-    created: function(){
+    created(){
       this._getTopList()
     }
   }

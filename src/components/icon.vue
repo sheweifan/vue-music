@@ -9,7 +9,7 @@
     name: 'scroll-view',
     props: ['name'],
     methods: {
-      iconclick: function(){
+      iconclick(){
         this.$emit('click')
       }
     }

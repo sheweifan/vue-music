@@ -11,7 +11,7 @@
     name: 'head',
     props: ['fixed', 'title'],
     methods: {
-      gobackClick: function(){
+      gobackClick(){
         this.$router.go(-1)
       }
     }

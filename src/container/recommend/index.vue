@@ -24,14 +24,14 @@ div
 	export default {
     mixins: [playListMixin],
   	name: 'recommend',
-    data: function(){
+    data(){
       return {
         slider: [],
         list: []
       }
     },
     methods: {
-      _getRecommend: async function(){
+      async _getRecommend(){
         const {success, data} = await getRecommend()
 
         if (success) {
@@ -39,7 +39,7 @@ div
           this.slider = slider
         }
       },
-      _getDiscList: async function(){
+      async _getDiscList(){
         const {success, data} = await getDiscList()
 
         if (success) {
@@ -47,11 +47,11 @@ div
           this.list = list
         }
       },
-      playListChange: function(playList){
+      playListChange(playList){
         this.setOffsetBottom(this.$refs['page-container'])
       }
     },
-    created: function(){
+    created(){
       this._getRecommend()
       this._getDiscList()
     }
