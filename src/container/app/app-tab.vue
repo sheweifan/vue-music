@@ -3,7 +3,7 @@
       span.left
         icon(name="icon-11")
       tabbar(:data="tab")
-      span.right
+      router-link.right(to="/search")
         icon(name="icon-7")
 </template>
 
@@ -59,8 +59,10 @@
       .icon
         width: 28px
         height: 28px
+        color: #666
     .right
       .icon
         width: 26px
         height: 26px
+        color: #666
 </style>
