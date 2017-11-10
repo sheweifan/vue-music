@@ -1,7 +1,10 @@
 <template lang="pug">
   transition(name="slide")
-    div(:class="'song-container '+ is")
-      scroll-view#song-scroll
+    div()
+      scroll-view#song-scroll(
+        ref="page-container"
+        :class="'song-container '+ is"
+      )
         div
           div.img
             img(v-if="logo" v-lazy="logo")
@@ -20,6 +23,7 @@
   import scrollView from '@/components/scroll-view.vue'
   import { getSongList, getSingerDetail, getMusicList } from '@/api'
   import { playMode } from '@/config'
+  import { playListMixin } from '@/mixins'
 
   const newSong = ({singer, songname, songmid, songid, albumname, albummid, interval}) => {
     return {
@@ -47,6 +51,7 @@
   }
 
   export default {
+    mixins: [playListMixin],
     name: 'song-list',
     components: {
       vHead,
@@ -96,6 +101,10 @@
           ...(isall ? {mode: playMode.order} : {})
         })
       },
+      playListChange: function(playList){
+        this.setOffsetBottom(this.$refs['page-container'].$el)
+        this.$refs['page-container'].scroll.refresh()
+      },
       ...mapActions([
         'play'
       ])
@@ -143,7 +152,7 @@
     li
       padding: $spacing
       position: relative
-      &:after
+      &:not(:nth-last-child(1)):after
         sethalfborderbottom()
         left: $spacing
         right: $spacing

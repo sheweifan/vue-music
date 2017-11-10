@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  div.recommend-container
+  div.recommend-container(ref="page-container")
     div.recommend-swiper
       mt-swipe(:auto="4000")
         mt-swipe-item(v-for="item in slider" key="item.id")
@@ -19,8 +19,11 @@ div
 
 <script>
   import { getRecommend, getDiscList } from '@/api'
+  import { playListMixin } from '@/mixins'
+
 	export default {
-		name: 'recommend',
+    mixins: [playListMixin],
+  	name: 'recommend',
     data: function(){
       return {
         slider: [],
@@ -43,8 +46,10 @@ div
           const { list } = data
           this.list = list
         }
+      },
+      playListChange: function(playList){
+        this.setOffsetBottom(this.$refs['page-container'])
       }
-
     },
     created: function(){
       this._getRecommend()

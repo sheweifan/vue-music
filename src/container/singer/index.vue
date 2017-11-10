@@ -1,9 +1,18 @@
 <template lang="pug">
 div
   div.singer-container#singer-container
-    mt-index-list
-      mt-index-section.singer-list(v-for="(item, index) of list" :index="item[0].title" :key="item.index")
-        router-link.singer-list-item(v-for="(child, index) of item" tag="div" :to="'/singer/'+child.id" :key="item.id")
+    mt-index-list(ref="mt-index-list")
+      mt-index-section.singer-list(
+        v-for="(item, index) of list" 
+        :index="item[0].title" 
+        :key="item.index"
+      )
+        router-link.singer-list-item(
+          v-for="(child, index) of item"
+          tag="div"
+          :to="'/singer/'+child.id"
+          :key="item.id"
+        )
           div.img
             img(v-lazy="child.imgUrl")
           p.title {{child.name}}
@@ -13,6 +22,8 @@ div
 <script>
   import { map, groupBy, filter, values, sortBy, take } from 'lodash'
   import { getSingerList } from '@/api'
+  import { playListMixin } from '@/mixins'
+  import { size } from '@/config'
 
   const singerDataFormat = (data) => {
     let list = filter(map(data, (item, index) => {
@@ -36,6 +47,7 @@ div
   }
 
   export default {
+    mixins: [playListMixin],
     name: 'singer',
     data: function(){
       return {
@@ -49,6 +61,10 @@ div
           const { list } = data
           this.list = singerDataFormat(list)
         }
+      },
+      playListChange: function(playList){
+        const h = window.innerHeight - size.appTabHeight - (playList.length === 0 ? 0 : size.miniPlayerHeight)
+        this.$refs['mt-index-list'].$el.querySelector('.mint-indexlist-content').style.height = h + 'px'
       }
     },
     created: function(){
@@ -64,7 +80,7 @@ div
     display: flex
     align-items: center
     position: relative
-    &:before
+    &:not(:nth-last-child(1)):before
       sethalfborderbottom()
     .img,
     .img img

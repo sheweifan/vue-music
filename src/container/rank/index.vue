@@ -1,6 +1,7 @@
 <template lang="pug">
 div
-  div.rank-list
+  div.rank-container(ref="page-container")
+    div.rank-list
     router-link.rank-list-item(tag="div" v-for="item in list" :key="item.id" :to="'/rank/'+ item.id")
       div.img
         img(v-lazy="item.picUrl")
@@ -11,7 +12,10 @@ div
 
 <script>
   import { getTopList } from '@/api'
+  import { playListMixin } from '@/mixins'
+
   export default {
+    mixins: [playListMixin],
     name: 'rank',
     data: function(){
       return {
@@ -25,6 +29,9 @@ div
           const { topList } = data
           this.list = topList
         }
+      },
+      playListChange: function(playList){
+        this.setOffsetBottom(this.$refs['page-container'])
       }
     },
     created: function(){
@@ -35,9 +42,10 @@ div
 
 <style lang="stylus" scoped>
   @import '../../static/stylus/index.styl'
+  .rank-container
+    fixed-page(true)
   .rank-list
     padding-top: $spacing
-    fixed-page(true)
   .rank-list-item
     margin: 0 $spacing $spacing
     border-radius: $radius
