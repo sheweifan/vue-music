@@ -47,12 +47,9 @@
             span.end {{ playSong.interval | songTime }}
           div.inner
             icon.player-icon(:name="modeIcon" @click="modeChange")
-            //- icon(name="icon-6")
-            //- icon(name="icon-8")
             div(:class="audioReady ? 'plays ready': 'plays' ")
               icon.player-icon(name="icon-3" @click="prev")
               icon.player-icon.play(:name="playIcon" @click="togglePlay")
-              //- icon(name="icon-4")
               icon.player-icon(name="icon-2" @click="next")
             icon.player-icon(name="icon-10")
     transition(name="slideTop")
@@ -278,6 +275,9 @@
         })
       },
       nowTime(){
+        if (this.lyric.length === 0){
+          return
+        }
         this.$nextTick(() => {
           const lyric = this.$refs.lyric
           const oft = lyric.$el.querySelectorAll('.lyric-item')[this.lyricIndex].offsetTop
