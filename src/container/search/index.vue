@@ -38,5 +38,5 @@
   @import '../../static/stylus/index.styl'
   .search-container
     fixed-page()
-    
+    z-index: 1
 </style>
