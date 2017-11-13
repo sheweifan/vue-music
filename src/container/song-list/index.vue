@@ -1,9 +1,10 @@
 <template lang="pug">
   transition(name="slide")
     div.song-container
-      scroll-view#song-scroll(
+      scroll-view(
         ref="page-container"
         :class="'song-container '+ is"
+        :watchs="list"
       )
         div
           div.img
