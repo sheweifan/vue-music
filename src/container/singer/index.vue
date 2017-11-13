@@ -20,25 +20,24 @@ div
 </template>
 
 <script>
-  import { map, groupBy, filter, values, sortBy, take } from 'lodash'
+  import _map from 'lodash/map'
+  import _groupBy from 'lodash/groupBy'
+  import _filter from 'lodash/filter'
+  import _values from 'lodash/values'
+  import _sortBy from 'lodash/sortBy'
+  import _take from 'lodash/take'
   import { getSingerList } from '@/api'
   import { playListMixin } from '@/mixins'
   import { size } from '@/config'
+  import { singer } from '@/utils'
 
+  const { newSinger } = singer
   const singerDataFormat = (data) => {
-    let list = filter(map(data, (item, index) => {
-      return {
-        id: item.Fsinger_mid,
-        title: item.Findex,
-        name: item.Fsinger_name,
-        imgUrl: `https://y.gtimg.cn/music/photo_new/T001R300x300M000${item.Fsinger_mid}.jpg?max_age=2592000`
-      }
-    }), (item) => !!item.title.match(/[a-zA-Z]/))
-
-    let listGroup = groupBy(list, 'title')
-    listGroup = values(listGroup)
-    listGroup = sortBy(listGroup, (item) => item[0].title)
-    const hot = map(take(list, 10), (item) => ({
+    let list = _filter(_map(data, newSinger), (item) => !!item.title.match(/[a-zA-Z]/))
+    let listGroup = _groupBy(list, 'title')
+    listGroup = _values(listGroup)
+    listGroup = _sortBy(listGroup, (item) => item[0].title)
+    const hot = _map(_take(list, 10), (item) => ({
       ...item,
       title: 'hot'
     }))

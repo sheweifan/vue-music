@@ -17,38 +17,21 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import { map } from 'lodash'
+  import _map from 'lodash/map'
+  import { mapActions } from 'vuex'
   import vHead from '@/components/v-head.vue'
   import scrollView from '@/components/scroll-view.vue'
   import { getSongList, getSingerDetail, getMusicList } from '@/api'
   import { playMode } from '@/config'
   import { playListMixin } from '@/mixins'
+  import { song } from '@/utils'
 
-  const newSong = ({singer, songname, songmid, songid, albumname, albummid, interval}) => {
-    return {
-      singer: map(singer, item => item.name).join('/'),
-      songname,
-      songmid,
-      songid,
-      albumname,
-      interval,
-      picUrl: `https://y.gtimg.cn/music/photo_new/T002R300x300M000${albummid}.jpg?max_age=2592000`,
-      url: `http://ws.stream.qqmusic.qq.com/${songid}.m4a?fromtag=46`
-    }
-  }
+  const { newSong } = song
+  const songFormater = (data) => _map(data, newSong)
 
-  const songFormater = (data) => {
-    return map(data, newSong)
-  }
+  const singerFormater = (data) => _map(data, ({musicData}) => newSong(musicData))
 
-  const singerFormater = (data) => {
-    return map(data, ({musicData}) => newSong(musicData))
-  }
-
-  const rankFormater = (data) => {
-    return map(data, ({data}) => newSong(data))
-  }
+  const rankFormater = (data) => _map(data, ({data}) => newSong(data))
 
   export default {
     mixins: [playListMixin],
