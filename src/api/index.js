@@ -54,7 +54,7 @@ export function getHotKey(){
   })
 }
 
-export function search(query, page, zhida, perpage){
+export function search(query, page, zhida, perpage = 20){
   const url = '/api/search'
   return axios.get(url, {
     params: {
