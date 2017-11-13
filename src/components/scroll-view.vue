@@ -1,16 +1,23 @@
 <template lang="pug">
-  div.scroll-wrapper(:id="id")
+  div(:class="'scroll-wrapper '+ newId")
     div.scroll-scroller
       slot
 </template>
 
 <script>
   import IScroll from 'iscroll'
+  import _random from 'lodash/random'
+
   export default {
     name: 'scroll-view',
-    props: ['id'],
+    props: ['watchs'],
+    computed: {
+      newId(){
+        return 'scroll-' + _random(9999999)
+      }
+    },
     mounted(){
-      this.scroll = new IScroll('#' + this.id, {
+      this.scroll = new IScroll('.' + this.newId, {
         scrollX: false,
         freeScroll: true,
         preventDefault: false
@@ -19,14 +26,18 @@
     updated(){
       this.$nextTick(() => {
         this.scroll.refresh()
-        setTimeout(() => {
-          this.scroll && this.scroll.refresh()
-        }, 1000)
       })
     },
     beforeDestroy(){
       this.scroll.destroy()
       this.scroll = null
+    },
+    watch: {
+      watchs() {
+        this.$nextTick(() => {
+          this.scroll.refresh()
+        })
+      }
     }
   }
 </script>
