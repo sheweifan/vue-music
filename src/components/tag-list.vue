@@ -1,6 +1,6 @@
 <template lang="pug">
   div.tag-list
-    span.tag-list-item(v-for="(item, index) in data" :key="index") {{ item.text }}
+    span.tag-list-item(v-for="(item, index) in data" :key="index" @click="itemClick(item, index)") {{ item.text }}
 </template>
 
 <script>
@@ -8,6 +8,9 @@
     name: 'tag-list',
     props: ['data'],
     methods: {
+      itemClick(item, index){
+        this.$emit('click', item, index)
+      }
     }
   }
 </script>
