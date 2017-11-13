@@ -40,7 +40,6 @@
 <style lang="stylus" scoped>
   .app-tab
     position: fixed
-    z-index: 1
     left: 0
     width: 100%
     top: 0
