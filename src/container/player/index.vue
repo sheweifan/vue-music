@@ -183,6 +183,10 @@
       // 上一首
       prev(){
         if (!this.audioReady) return
+        if (this.playList.length === 1){
+          this.loop()
+          return
+        }
         const index = this.playIndex === 0 ? (this.playList.length - 1) : (this.playIndex - 1)
         this.setPlayIndex(index)
         this.audioReady = false
@@ -190,6 +194,10 @@
       // 下一首
       next(){
         if (!this.audioReady) return
+        if (this.playList.length === 1){
+          this.loop()
+          return
+        }
         const index = this.playIndex === (this.playList.length - 1) ? 0 : (this.playIndex + 1)
         this.setPlayIndex(index)
         this.audioReady = false
@@ -198,12 +206,15 @@
       // canplay: function(){
       //   this.audioReady = true
       // },
+      loop(){
+        const audio = this.$refs.audio
+        audio.currentTime = 0
+        audio.play()
+      },
       // 音频结束
       ended(){
         if (this.playMode === playMode.loop){
-          const audio = this.$refs.audio
-          audio.currentTime = 0
-          audio.play()
+          this.loop()
         } else {
           this.next()
         }
