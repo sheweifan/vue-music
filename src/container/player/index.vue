@@ -296,6 +296,7 @@
   .player-container
     fixed-page()
     background-color: rgba(255,255,255,0.95)
+    z-index: 3
   .player-head
     text-align: center
     position: absolute
