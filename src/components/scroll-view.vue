@@ -16,12 +16,28 @@
         return 'scroll-' + _random(9999999)
       }
     },
+    methods: {
+      _scroll(){
+        this.$emit('scroll', this.scroll)
+      },
+      _scrollEnd(e){
+        this.$emit('scrollEnd', this.scroll)
+        if (this.scroll.y <= this.scroll.maxScrollY) {
+          this.$emit('pullUp', this.scroll)
+        } else if (this.scroll.y >= 0) {
+          this.$emit('pullDown', this.scroll)
+        }
+      }
+    },
     mounted(){
       this.scroll = new IScroll('.' + this.newId, {
         scrollX: false,
         freeScroll: true,
         preventDefault: false
       })
+
+      this.scroll.on('scroll', this._scroll)
+      this.scroll.on('scrollEnd', this._scrollEnd)
     },
     updated(){
       this.$nextTick(() => {
@@ -53,7 +69,7 @@
     left: 0
     width: 100%
     overflow: hidden
-    z-index: 2
+    // z-index: 2
   .scroll-scroller
     position: absolute
     width: 100%
