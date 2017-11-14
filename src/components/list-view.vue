@@ -1,5 +1,5 @@
 <template lang="pug">
-  scroll-view(watchs="data" @pullUp="pullUp")
+  scroll-view(:watchs="loading" @pullUp="pullUp")
     slot
     div.list-view-footer
       mt-spinner(:type="2" v-if="loading")
@@ -12,19 +12,7 @@
   
   export default {
     name: 'list-view',
-    props: [
-      {
-        data: {
-          default: [],
-          type: Array
-        },
-        pageTotal: {
-          default: 1,
-          type: Number
-        }
-      },
-      'totalPage'
-    ],
+    props: ['totalPage'],
     data(){
       return {
         loading: false,

@@ -10,7 +10,6 @@
         :watchs="{searchKey, hotkey, searchHistory}" 
         :totalPage="searchListTotalPage"
         v-if="searchKey"
-        :data="searchList"
         @loadMore="loadMore"
       )
         control-item(
@@ -82,7 +81,7 @@
     },
     data(){
       return {
-        searchKey: '周杰伦',
+        searchKey: '',
         hotkey: [],
         searchList: [],
         searchListTotalPage: 0
@@ -133,6 +132,7 @@
           let { song, zhida } = data
           this.searchListTotalPage = Math.ceil(song.totalnum / PAGE_COUNT)
           song.list = songFormater(song.list)
+          console.log(pageIndex, pageIndex === 1)
           if (zhida.type === 2 && pageIndex === 1){
             song.list = [singerFormater(zhida)].concat(song.list)
           }
