@@ -14,3 +14,5 @@ export const playSong = state => {
   return state.playList[state.playIndex] || {}
 }
 
+export const searchHistory = state => state.searchHistory
+

@@ -18,5 +18,8 @@ export default {
   },
   [types.SET_PLAYING](state, bool) {
     state.playing = bool
+  },
+  [types.SET_SEARCH_HISTORY](state, searchHistory) {
+    state.searchHistory = searchHistory
   }
 }

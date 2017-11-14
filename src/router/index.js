@@ -46,7 +46,13 @@ export default new Router({
 		},
 		{
 			path: '/search',
-			component: search
+			component: search,
+			children: [
+				{
+					path: 'singer/:id',
+					component: songList
+				}
+			]
 		}
 	]
 })
