@@ -7,7 +7,7 @@
             v-for="(item, index) in playList" 
             :key="index"
             :icon=" item.songid === playSong.songid ? 'icon-1': ' ' " 
-            :btns="['collect', 'delete']"
+            :btns="[{name:'collect',className: isCollected(item) ? 'active' : ''}, {name: 'delete'}]"
             :data="item"
             :index="index"
             @btns-click="btnsClick"
@@ -23,8 +23,10 @@
   import { MessageBox } from 'mint-ui'
   import controlItem from '@/components/control-item.vue'
   import scrollView from '@/components/scroll-view.vue'
+  import { collectMixin } from '@/mixins'
 
   export default {
+    mixins: [collectMixin],
     name: 'play-list',
     components: {
       controlItem,
@@ -41,6 +43,8 @@
       btnsClick(name, item){
         if (name === 'delete'){
           this.removePlayList(item)
+        } else {
+          this.toggleCollect(item)
         }
       },
       singItemClick(item, index){
@@ -67,6 +71,7 @@
   @import '../../static/stylus/index.styl'
   .play-list-container
     fixed-page()
+    z-index: 3
     background: rgba(0,0,0,0.6)
     &.play-list-fade-enter-active,
     &.play-list-fade-leave-active
