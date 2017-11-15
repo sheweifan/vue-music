@@ -1,8 +1,11 @@
 <template lang="pug">
   div.control-item(@click="itemClick")
-    icon.control-item-icon(:name="icon")
-    span.control-item_title
+    icon.control-item-icon(:name="icon" v-if="icon")
+    span.control-item-title
       slot
+    span.control-item-btns(v-if="btns")
+      i(v-for="(item, index) in btns" :key="index" @click.stop="btnsClick(item)")
+        icon(:class="'control-item-icon ' + item" :name="getIcon(item)")
 </template>
 
 <script>
@@ -13,10 +16,23 @@
     components: {
       icon
     },
-    props: ['data', 'icon', 'index'],
+    props: ['data', 'icon', 'index', 'btns', 'index'],
     methods: {
+      getIcon(name){
+        switch (name){
+          case 'collect':
+            return 'icon-10'
+          case 'delete':
+            return 'guanbi'
+          default :
+            return ' '
+        }
+      },
       itemClick(){
         this.$emit('click')
+      },
+      btnsClick(name){
+        this.$emit('btns-click', name, this.data, this.index)
       }
     }
   }
@@ -40,6 +56,13 @@
     width: 20px
     height: 20px
     margin-right: $spacing
-  .control-item_title
+    &.delete
+      width: 15px
+      height: 15px
+  .control-item-title
     flex: 1
+  .control-item-btns
+    display: flex
+    justify-content: center
+    align-items: center
 </style>
