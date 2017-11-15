@@ -7,6 +7,7 @@ import _filter from 'lodash/filter'
 import _concat from 'lodash/concat'
 import _isNumber from 'lodash/isNumber'
 import _take from 'lodash/take'
+import _difference from 'lodash/difference'
 
 import { storage } from '@/utils'
 import { playMode, constant } from '@/config'
@@ -31,12 +32,34 @@ export const play = ({commit, state}, {list, index, mode = state.playMode}) => {
 
 export const addPlayList = ({commit, state}, {list, index}) => {
   let newList = _concat(list, state.playList)
+  let newNomoalList = _concat(list, state.nominalList)
   newList = _uniqBy(newList, 'songid')
   commit(types.SET_PLAY_LIST, newList)
-  commit(types.SET_NOMINAL_LIST, newList)
+  commit(types.SET_NOMINAL_LIST, newNomoalList)
   _isNumber(index) && commit(types.SET_PLAY_INDEX, index)
   commit(types.SET_PLAY_SCREEN, true)
   commit(types.SET_PLAYING, true)
+}
+
+export const removePlayList = ({commit, state}, data) => {
+  let {playList, playIndex, nominalList} = state
+  let delectList = _isObject(data) ? [data] : data
+  const newList = _difference(playList, delectList)
+  const newNnominalList = _difference(nominalList, delectList)
+  if (playIndex === playList.length - 1){
+    playIndex = 0
+  }
+  commit(types.SET_PLAY_LIST, newList)
+  commit(types.SET_NOMINAL_LIST, newNnominalList)
+  commit(types.SET_PLAY_INDEX, playIndex)
+}
+
+export const removeAllPlayList = ({commit, state}) => {
+  commit(types.SET_PLAY_LIST, [])
+  commit(types.SET_NOMINAL_LIST, [])
+  commit(types.SET_PLAY_INDEX, -1)
+  commit(types.SET_PLAYING, false)
+  commit(types.SET_PLAY_LIST_CHECKING, false)
 }
 
 // 设置是否全屏
@@ -94,4 +117,10 @@ export const removeSearchHistory = ({commit, state}, data) => {
   }
   storage.set(constant.searchHistoryStorageKey, list)
   commit(types.SET_SEARCH_HISTORY, list)
+}
+
+// 查看播放列表
+export const setPlayListChecking = ({commit, state}, bool) => {
+  console.log(bool)
+  commit(types.SET_PLAY_LIST_CHECKING, bool)
 }

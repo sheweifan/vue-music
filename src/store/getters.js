@@ -16,3 +16,5 @@ export const playSong = state => {
 
 export const searchHistory = state => state.searchHistory
 
+export const playListChecking = state => state.playListChecking
+

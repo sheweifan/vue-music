@@ -21,5 +21,8 @@ export default {
   },
   [types.SET_SEARCH_HISTORY](state, searchHistory) {
     state.searchHistory = searchHistory
+  },
+  [types.SET_PLAY_LIST_CHECKING](state, bool) {
+    state.playListChecking = bool
   }
 }

@@ -7,5 +7,6 @@ export default {
   playScreen: false,
   nominalList: [],
   playing: false,
-  searchHistory: []
+  searchHistory: [],
+  playListChecking: false
 }
