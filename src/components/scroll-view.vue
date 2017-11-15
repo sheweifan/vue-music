@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(:class="'scroll-wrapper '+ newId")
+  div(:class="'scroll-wrapper '+ newId" @touchmove.prevent="")
     div.scroll-scroller
       slot
 </template>
