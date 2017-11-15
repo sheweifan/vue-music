@@ -31,6 +31,7 @@
           div.player-range
             span.start {{ nowTime | songTime }}
             vue-slider(
+              ref="range"
               class="range"
               v-model="nowTime" 
               :min="0" 
@@ -64,7 +65,8 @@
         div.btns
           i(@click.stop="togglePlay")
             icon.player-icon(:name="playIcon")
-          icon.player-icon(name="icon-9")
+          i(@click.stop="setPlayListChecking(true)")
+            icon.player-icon(name="icon-9")
 
 </template>
 
@@ -141,7 +143,8 @@
         'playMode',
         'playScreen',
         'playSong',
-        'playing'
+        'playing',
+        'playListChecking'
       ])
     },
     created(){
@@ -171,6 +174,9 @@
       // 显示screen
       show: function(){
         this.setScreen(true)
+        this.$nextTick(() => {
+          this.$refs.range.refresh()
+        })
       },
       // 播放按钮
       togglePlay: function(){
@@ -265,7 +271,8 @@
         'setScreen',
         'setPlaying',
         'setPlayIndex',
-        'setPlayMode'
+        'setPlayMode',
+        'setPlayListChecking'
       ])
     },
     watch: {
@@ -274,8 +281,11 @@
           return
         }
         this.$nextTick(() => {
-          this.$refs.audio.play()
           this._getLyric()
+          // if (this.playListChecking && !this.playing){
+          //   return
+          // }
+          this.$refs.audio.play()
         })
       },
       playing(newPlaying){
@@ -409,7 +419,7 @@
     bottom: 0
     background: #fff
     width: 100%
-    z-index: 2
+    // z-index: 2
     padding: $spacing
     display: flex
     align-items: center
