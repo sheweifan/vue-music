@@ -2,11 +2,13 @@
   transition(name="slide")
     div.search-container(ref="page-container")
       searchBar(
+        ref="search-bar"
         v-model="searchKey"
         placeholder="搜索歌曲、歌手"
         @cancel-click="cancelClick"
       )
       list-view.search-scroll-view(
+        ref="search-scroll-view"
         :watchs="{searchKey, hotkey, searchHistory}" 
         :totalPage="searchListTotalPage"
         v-if="searchKey"
@@ -155,7 +157,6 @@
         done()
       },
       ...mapActions([
-        'getSearchHistory',
         'addSearchHistory',
         'removeSearchHistory',
         'addPlayList'
@@ -163,7 +164,7 @@
     },
     created(){
       this._getHotKey()
-      this.getSearchHistory()
+      // this.getSearchHistory()
       this._search()
     },
     watch: {
@@ -181,7 +182,7 @@
     fixed-page()
     z-index: 1
     .search-scroll-view
-      top: 40px
+      top: 47px
   .search-title
     font-size: $fontSize
     line-height: 1.5
