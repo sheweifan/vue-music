@@ -1,6 +1,6 @@
 <template lang="pug">
     div.app-tab
-      span.left
+      router-link.left(to="/user")
         icon(name="icon-11")
       tabbar(:data="tab")
       router-link.right(to="/search")
