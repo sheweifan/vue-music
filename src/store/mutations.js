@@ -19,10 +19,16 @@ export default {
   [types.SET_PLAYING](state, bool) {
     state.playing = bool
   },
-  [types.SET_SEARCH_HISTORY](state, searchHistory) {
-    state.searchHistory = searchHistory
+  [types.SET_SEARCH_HISTORY](state, list) {
+    state.searchHistory = list
   },
   [types.SET_PLAY_LIST_CHECKING](state, bool) {
     state.playListChecking = bool
+  },
+  [types.SET_COLLECT_HISTORY](state, list) {
+    state.collectHistory = list
+  },
+  [types.SET_PLAY_HISTORY](state, list) {
+    state.playHistory = list
   }
 }

@@ -1,4 +1,5 @@
-import { playMode } from '@/config'
+import { playMode, constant } from '@/config'
+import { storage } from '@/utils'
 
 export default {
   playList: [],
@@ -7,6 +8,8 @@ export default {
   playScreen: false,
   nominalList: [],
   playing: false,
-  searchHistory: [],
-  playListChecking: false
+  playListChecking: false,
+  searchHistory: storage.get(constant.searchHistoryStorageKey) || [],
+  collectHistory: storage.get(constant.collectHistoryStorageKey) || [],
+  playHistory: storage.get(constant.playHistoryStorageKey) || []
 }

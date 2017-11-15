@@ -30,10 +30,28 @@ export const play = ({commit, state}, {list, index, mode = state.playMode}) => {
   commit(types.SET_PLAYING, true)
 }
 
+export const listPlay = ({commit, state}, {list, mode = playMode.order}) => {
+  let newList = list
+  if (mode === playMode.random){
+    newList = _shuffle(list)
+  }
+  (mode !== state.playMode) && commit(types.SET_PLAY_MODE, mode)
+  console.log(newList, mode)
+  commit(types.SET_PLAY_LIST, newList)
+  commit(types.SET_NOMINAL_LIST, list)
+  commit(types.SET_PLAY_INDEX, 0)
+  commit(types.SET_PLAY_SCREEN, true)
+  commit(types.SET_PLAYING, true)
+}
+
 export const addPlayList = ({commit, state}, {list, index}) => {
   let newList = _concat(list, state.playList)
   let newNomoalList = _concat(list, state.nominalList)
   newList = _uniqBy(newList, 'songid')
+  // 如果播放列表是空的，从第一条开始播放
+  if (state.playList.length === 0){
+    index = 0
+  }
   commit(types.SET_PLAY_LIST, newList)
   commit(types.SET_NOMINAL_LIST, newNomoalList)
   _isNumber(index) && commit(types.SET_PLAY_INDEX, index)
@@ -93,11 +111,16 @@ export const setPlayMode = ({commit, state}, {mode, index = 0, list = state.nomi
   commit(types.SET_PLAY_LIST, newList)
 }
 
-// 搜索历史
-export const getSearchHistory = ({commit, state}) => {
-  const list = storage.get(constant.searchHistoryStorageKey)
-  commit(types.SET_SEARCH_HISTORY, list)
+// 查看播放列表
+export const setPlayListChecking = ({commit, state}, bool) => {
+  commit(types.SET_PLAY_LIST_CHECKING, bool)
 }
+
+// 搜索历史
+// export const getSearchHistory = ({commit, state}) => {
+//   const list = storage.get(constant.searchHistoryStorageKey)
+//   commit(types.SET_SEARCH_HISTORY, list)
+// }
 
 export const addSearchHistory = ({commit, state}, data) => {
   let list = _clone(state.searchHistory)
@@ -119,8 +142,31 @@ export const removeSearchHistory = ({commit, state}, data) => {
   commit(types.SET_SEARCH_HISTORY, list)
 }
 
-// 查看播放列表
-export const setPlayListChecking = ({commit, state}, bool) => {
-  console.log(bool)
-  commit(types.SET_PLAY_LIST_CHECKING, bool)
+export const addCollectHistory = ({commit, state}, data) => {
+  let list = _clone(state.collectHistory)
+  list = [data].concat(list)
+  list = _uniqBy(list, 'songid')
+  list = _take(list, 50)
+  storage.set(constant.collectHistoryStorageKey, list)
+  commit(types.SET_COLLECT_HISTORY, list)
+}
+
+export const removeCollectHistory = ({commit, state}, data) => {
+  let list = _clone(state.collectHistory)
+  if (_isObject(data)){
+    list = _filter(list, ({songid}) => songid !== data.songid)
+  } else {
+    list = []
+  }
+  storage.set(constant.collectHistoryStorageKey, list)
+  commit(types.SET_COLLECT_HISTORY, list)
+}
+
+export const addPlayHistory = ({commit, state}, data) => {
+  let list = _clone(state.playHistory)
+  list = [data].concat(list)
+  list = _uniqBy(list, 'songid')
+  list = _take(list, 50)
+  storage.set(constant.playHistoryStorageKey, list)
+  commit(types.SET_PLAY_HISTORY, list)
 }
