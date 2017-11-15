@@ -1,9 +1,11 @@
 <template lang="pug">
   header(:class="fixed ? 'v-head fixed': 'v-head'")
     span.goback(@click="gobackClick")
-    p.title {{ title }}
+    p.title
+      span(v-if="title") {{ title }}
+      slot(v-else)
     span.right
-      slot
+      slot(name="right")
 </template>
 
 <script>
@@ -29,6 +31,7 @@
     box-sizing: border-box
     width: 100%
     background: $opacityBg
+    color: #fff
     &.fixed
       top: 0
       left: 0
@@ -45,10 +48,11 @@
         content: ''
         margin: 0 $spacing
     .title
-      text-align: center
+      flex: 1
+      display: flex
+      justify-content: center
+      align-items: center
       font-size: 16px
       line-height: 2
-      color: #fff
-      flex: 1
       ellipsis()
 </style>
