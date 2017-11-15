@@ -2,15 +2,18 @@
   div.search-bar
     div.search-input
       input.input(
+        ref="input"
         type="search"
         :placeholder="placeholder"
         v-model="currentValue"
       )
-      icon.clean(
-        name="guanbi"
-        v-show="currentValue !== ''"
+      i(
         @click="cleanValue"
+        v-show="currentValue !== ''"
       )
+        icon.clean(
+          name="guanbi"
+        )
     a.search-cancel(href="javascript:" @click="cancelClick") 取消
 </template>
 
@@ -41,6 +44,7 @@
     methods: {
       cleanValue(){
         this.currentValue = ''
+        this.$refs['input'].focus()
       },
       cancelClick(){
         this.$emit('cancel-click')
@@ -62,7 +66,7 @@
 <style lang="stylus" scoped>
   @import '../static/stylus/index.styl'
   $p= $spacing/2
-  $h= $fontSize*1.25
+  $h= $fontSize*1.7
   .search-bar
     padding: $p 0 $p $spacing
     background: $opacityBg
@@ -75,7 +79,7 @@
     .clean
       width: 14px
       height: 14px
-      padding: 8px $spacing
+      padding: 12px
     .input
       background: none
       flex: 1
