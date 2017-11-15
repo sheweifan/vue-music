@@ -52,7 +52,7 @@
               icon.player-icon(name="icon-3" @click="prev")
               icon.player-icon.play(:name="playIcon" @click="togglePlay")
               icon.player-icon(name="icon-2" @click="next")
-            icon.player-icon(name="icon-10")
+            icon(:class=" 'player-icon ' + ( isCollected(playSong) ? 'active' : '' ) " name="icon-10" @click="toggleCollect(playSong)")
     transition(name="slideTop")
       div.player-mini(v-show="!playScreen" @click="show")
         div.progress
@@ -73,15 +73,18 @@
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import vueSlider from 'vue-slider-component'
-  import { isEqual, findIndex } from 'lodash'
+  import _isEqual from 'lodash/isEqual'
+  import _findIndex from 'lodash/findIndex'
   import icon from '@/components/icon'
   import scrollView from '@/components/scroll-view'
   import { getLyric } from '@/api'
   import { playMode } from '@/config'
   import { base642Lyric } from '@/utils'
   import screenAnimate from './screen-animate'
+  import { collectMixin } from '@/mixins'
 
   export default {
+    mixins: [collectMixin],
     name: 'player',
     components: {
       icon,
@@ -132,7 +135,7 @@
       lyricIndex(){
         const nowTime = this.nowTime
         const lyric = this.lyric
-        const idx = findIndex(lyric, function(item, index){
+        const idx = _findIndex(lyric, function(item, index){
           return item.time > nowTime
         })
         return Math.max(0, idx - 1)
@@ -175,7 +178,7 @@
       show: function(){
         this.setScreen(true)
         this.$nextTick(() => {
-          this.$refs.range.refresh()
+          this.$refs.range && this.$refs.range.refresh()
         })
       },
       // 播放按钮
@@ -272,12 +275,13 @@
         'setPlaying',
         'setPlayIndex',
         'setPlayMode',
-        'setPlayListChecking'
+        'setPlayListChecking',
+        'addPlayHistory'
       ])
     },
     watch: {
       playSong(newSong, oldSong){
-        if (isEqual(newSong, oldSong)){
+        if (_isEqual(newSong, oldSong)){
           return
         }
         this.$nextTick(() => {
@@ -285,6 +289,7 @@
           // if (this.playListChecking && !this.playing){
           //   return
           // }
+          this.addPlayHistory(newSong)
           this.$refs.audio.play()
         })
       },
@@ -371,6 +376,8 @@
     &.play
       width: 50px
       height: 50px
+    &.active
+      color: $color
 
   .player-body
     padding-top: 65px
