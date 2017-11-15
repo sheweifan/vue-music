@@ -5,17 +5,20 @@
     keep-alive
       router-view
     player
+    play-list
 </template>
 
 <script>
 	import '../static/css/reset.css'
   import appTab from '@/container/app/app-tab.vue'
   import player from '@/container/player'
+  import playList from '@/container/play-list'
 	export default {
 		name: 'app',
     components: {
       appTab,
-      player
+      player,
+      playList
     }
 	}
 </script>
