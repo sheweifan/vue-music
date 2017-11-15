@@ -1,5 +1,5 @@
 <template lang="pug">
-  scroll-view(:watchs="loading" @pullUp="pullUp")
+  scroll-view(:watchs="loading" @pullUp="pullUp" ref="scroll")
     slot
     div.list-view-footer
       mt-spinner(:type="2" v-if="loading")
@@ -38,6 +38,9 @@
     },
     created(){
       this.$nextTick(this._load)
+      this.$nextTick(() => {
+        this.scroll = this.$refs['scroll'].scroll
+      })
     }
   }
 </script>
