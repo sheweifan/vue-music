@@ -9,11 +9,14 @@
         div
           div.img
             img(v-if="logo" v-lazy="logo")
-            span.play-btn(@click="list_play(0, true)") 全部播放
-          ul.song-list
-            li(v-for="(item, index) in list" :key="item.songid" @click="list_play(index)")
-              p.name {{item.songname}}
-              p.singer {{item.singer}}
+            span.play-btn(@click="songListPlay(0, true)") 全部播放
+          div.song-list
+            song-item(
+              v-for="(item, index) in list" 
+              :key="item.songid" 
+              :data="item" 
+              @click="songListPlay(index)"
+            )
       v-head(fixed="true" :title="nick")
 </template>
 
@@ -21,6 +24,7 @@
   import _map from 'lodash/map'
   import { mapActions } from 'vuex'
   import vHead from '@/components/v-head.vue'
+  import songItem from '@/components/song-item.vue'
   import scrollView from '@/components/scroll-view.vue'
   import { getSongList, getSingerDetail, getMusicList } from '@/api'
   import { playMode } from '@/config'
@@ -39,7 +43,8 @@
     name: 'song-list',
     components: {
       vHead,
-      scrollView
+      scrollView,
+      songItem
     },
     data() {
       return {
@@ -78,18 +83,25 @@
           this.list = rankFormater(songlist)
         }
       },
-      list_play(index, isall = false){
-        this.play({
-          list: this.list,
-          index,
-          ...(isall ? {mode: playMode.order} : {})
-        })
+      songListPlay(index, isall = false){
+        if (isall){
+          this.listPlay({
+            list: this.list,
+            mode: playMode.order
+          })
+        } else {
+          this.play({
+            list: this.list,
+            index
+          })
+        }
       },
       playListChange(playList){
         this.setOffsetBottom(this.$refs['page-container'].$el)
         this.$refs['page-container'].scroll.refresh()
       },
       ...mapActions([
+        'listPlay',
         'play'
       ])
     },
@@ -133,23 +145,5 @@
       left: 50%
   .song-list
     padding: $spacing 0
-    li
-      padding: $spacing
-      position: relative
-      &:not(:nth-last-child(1)):after
-        sethalfborderbottom()
-        left: $spacing
-        right: $spacing
-    .name
-      font-size: $fontSize
-      lin-height: 2
-      color: #333
-      margin-bottom: ($spacing/2)
-      ellipsis()
-    .singer
-      font-size: ($fontSize*0.8)
-      lin-height: 1.5
-      color: #999
-      ellipsis()
 
 </style>
