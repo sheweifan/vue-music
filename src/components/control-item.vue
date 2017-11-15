@@ -4,8 +4,8 @@
     span.control-item-title
       slot
     span.control-item-btns(v-if="btns")
-      i(v-for="(item, index) in btns" :key="index" @click.stop="btnsClick(item)")
-        icon(:class="'control-item-icon ' + item" :name="getIcon(item)")
+      i(v-for="(item, index) in btns" :key="index" @click.stop="btnsClick(item.name)")
+        icon(:class="'control-item-icon ' + item.name + ' ' + (item.className || ' ') " :name="getIcon(item.name)")
 </template>
 
 <script>
@@ -59,6 +59,8 @@
     &.delete
       width: 15px
       height: 15px
+    &.active
+      color: $color
   .control-item-title
     flex: 1
   .control-item-btns
