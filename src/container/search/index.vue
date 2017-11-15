@@ -17,7 +17,7 @@
           :key="item.index"
           :icon="item.icon"
           @click="searchItemClick(item)"
-        ) {{item.songname || item.name}}
+        ) {{item.name || (item.songname +' - '+ item.singer)}}
       scroll-view.search-scroll-view(data="" v-else)
         h3.search-title(v-if="hotkey.length !== 0") 热门搜索 ({{hotkey.length}})
         tag-list(:data="hotkey" @click="tagClick")
