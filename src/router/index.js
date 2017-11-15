@@ -5,6 +5,7 @@ import singer from '@/container/singer'
 import rank from '@/container/rank'
 import songList from '@/container/song-list'
 import search from '@/container/search'
+import user from '@/container/user'
 
 Vue.use(Router)
 
@@ -53,6 +54,10 @@ export default new Router({
 					component: songList
 				}
 			]
+		},
+		{
+			path: '/user',
+			component: user
 		}
 	]
 })
