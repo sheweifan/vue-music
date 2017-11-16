@@ -1,22 +1,27 @@
 <template lang="pug">
 div
   div.rank-container(ref="page-container")
-    div.rank-list
-    router-link.rank-list-item(tag="div" v-for="item in list" :key="item.id" :to="'/rank/'+ item.id")
-      div.img
-        img(v-lazy="item.picUrl")
-      ul.list
-        li(v-for="(child, index) in item.songList") {{index+1}} 、 {{child.songname}} - {{child.singername}}
+    loading(v-if="list.length === 0")
+    div.rank-list(v-else)
+      router-link.rank-list-item(tag="div" v-for="item in list" :key="item.id" :to="'/rank/'+ item.id")
+        div.img
+          img(v-lazy="item.picUrl")
+        ul.list
+          li(v-for="(child, index) in item.songList") {{index+1}} 、 {{child.songname}} - {{child.singername}}
   router-view
 </template>
 
 <script>
   import { getTopList } from '@/api'
   import { playListMixin } from '@/mixins'
+  import loading from '@/components/loading.vue'
 
   export default {
     mixins: [playListMixin],
     name: 'rank',
+    components: {
+      loading
+    },
     data(){
       return {
         list: []

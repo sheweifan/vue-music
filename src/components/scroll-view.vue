@@ -73,6 +73,7 @@
   .scroll-scroller
     position: absolute
     width: 100%
+    min-height: 100%
     -webkit-tap-highlight-color: rgba(0,0,0,0)
     -webkit-transform: translateZ(0)
     -moz-transform: translateZ(0)

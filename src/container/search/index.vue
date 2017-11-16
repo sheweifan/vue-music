@@ -21,8 +21,10 @@
           @click="searchItemClick(item)"
         ) {{item.name || (item.songname +' - '+ item.singer)}}
       scroll-view.search-scroll-view(data="" v-else)
-        h3.search-title(v-if="hotkey.length !== 0") 热门搜索 ({{hotkey.length}})
-        tag-list(:data="hotkey" @click="tagClick")
+        loading(v-if="hotkey.length === 0")
+        div(v-else)
+          h3.search-title 热门搜索 ({{hotkey.length}})
+          tag-list(:data="hotkey" @click="tagClick")
         h3.search-title(v-if="searchHistory.length !== 0")
           span 历史记录 ({{searchHistory.length}})
           icon.search-history-clean-btn(name="shanchu" @click="cleanHistory")
@@ -39,6 +41,7 @@
   import { MessageBox } from 'mint-ui'
   import { playListMixin } from '@/mixins'
   import vHead from '@/components/icon'
+  import loading from '@/components/loading.vue'
   import icon from '@/components/icon.vue'
   import scrollView from '@/components/scroll-view.vue'
   import listView from '@/components/list-view.vue'
@@ -79,7 +82,8 @@
       searchBar,
       tagList,
       controlItem,
-      listView
+      listView,
+      loading
     },
     data(){
       return {
@@ -107,7 +111,6 @@
           text: this.searchKey
         })
         if (type === 'song'){
-          console.log(type)
           this.addPlayList({
             list: [item],
             index: 0
@@ -134,7 +137,6 @@
           let { song, zhida } = data
           this.searchListTotalPage = Math.ceil(song.totalnum / PAGE_COUNT)
           song.list = songFormater(song.list)
-          console.log(pageIndex, pageIndex === 1)
           if (zhida.type === 2 && pageIndex === 1){
             song.list = [singerFormater(zhida)].concat(song.list)
           }

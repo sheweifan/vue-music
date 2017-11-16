@@ -6,7 +6,8 @@
         :class="'song-container '+ is"
         :watchs="list"
       )
-        div
+        loading(v-if="list.length === 0" height="300")
+        div(v-else)
           div.img
             img(v-if="logo" v-lazy="logo")
             span.play-btn(@click="songListPlay(0, true)") 全部播放
@@ -26,10 +27,12 @@
   import vHead from '@/components/v-head.vue'
   import songItem from '@/components/song-item.vue'
   import scrollView from '@/components/scroll-view.vue'
+  import loading from '@/components/loading.vue'
   import { getSongList, getSingerDetail, getMusicList } from '@/api'
   import { playMode } from '@/config'
   import { playListMixin } from '@/mixins'
   import { song } from '@/utils'
+  import { Toast } from 'mint-ui'
 
   const { newSong } = song
   const songFormater = (data) => _map(data, newSong)
@@ -44,7 +47,8 @@
     components: {
       vHead,
       scrollView,
-      songItem
+      songItem,
+      loading
     },
     data() {
       return {
@@ -64,6 +68,8 @@
           this.nick = nick
           this.list = songFormater(songlist)
         }
+
+        return Promise.resolve()
       },
       async _getSingerDetail(id){
         const { success, data } = await getSingerDetail(id)
@@ -105,20 +111,28 @@
         'play'
       ])
     },
-    created(){
+    async created(){
       const {path, params} = this.$route
       let is = ''
       if (path.indexOf('recommend') > 0) {
-        this._getSongList(params.id)
+        await this._getSongList(params.id)
         is = 'recommend'
       } else if (path.indexOf('singer') > 0) {
-        this._getSingerDetail(params.id)
+        await this._getSingerDetail(params.id)
         is = 'singer'
       } else if (path.indexOf('rank') > 0) {
-        this._getMusicList(params.id)
+        await this._getMusicList(params.id)
         is = 'rank'
       }
       this.is = is
+      if (this.list.length === 0) {
+        setTimeout(() => this.$router.push('/rank'), 1000)
+        Toast({
+          message: '出错了，去看看别的歌单吧',
+          position: 'bottom',
+          duration: 3000
+        })
+      }
     }
   }
 </script>

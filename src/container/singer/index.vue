@@ -1,7 +1,8 @@
 <template lang="pug">
 div
   div.singer-container#singer-container
-    mt-index-list(ref="mt-index-list")
+    loading(v-if="list.length === 0" :height="250")
+    mt-index-list(v-else ref="mt-index-list")
       mt-index-section.singer-list(
         v-for="(item, index) of list" 
         :index="item[0].title" 
@@ -26,6 +27,7 @@ div
   import _values from 'lodash/values'
   import _sortBy from 'lodash/sortBy'
   import _take from 'lodash/take'
+  import loading from '@/components/loading.vue'
   import { getSingerList } from '@/api'
   import { playListMixin } from '@/mixins'
   import { size } from '@/config'
@@ -48,9 +50,12 @@ div
   export default {
     mixins: [playListMixin],
     name: 'singer',
+    components: {
+      loading
+    },
     data(){
       return {
-        list: {}
+        list: []
       }
     },
     methods: {
@@ -62,6 +67,7 @@ div
         }
       },
       playListChange(playList){
+        if (this.list.length === 0) return
         const h = window.innerHeight - size.appTabHeight - (playList.length === 0 ? 0 : size.miniPlayerHeight)
         this.$refs['mt-index-list'].$el.querySelector('.mint-indexlist-content').style.height = h + 'px'
       }

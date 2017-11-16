@@ -3,11 +3,14 @@ div
   div.recommend-container(ref="page-container")
     div.recommend-swiper
       mt-swipe(:auto="4000")
-        mt-swipe-item(v-for="item in slider" key="item.id")
+        mt-swipe-item(v-if="slider.length === 0")
+          loading
+        mt-swipe-item(v-else v-for="item in slider" key="item.id")
           a(:href="item.linkUrl")
             img(:src="item.picUrl")
     div.recommend-list-tile 热门歌单推荐
-    div.recommend-list
+    loading(v-if="list.length === 0" :height="200")
+    div.recommend-list(v-else)
       router-link.recommend-list-item(tag="div" :to="'/recommend/'+item.dissid" v-for="item in list" :key="item.dissid")
         div.img
           img(:src="item.imgurl")
@@ -20,10 +23,14 @@ div
 <script>
   import { getRecommend, getDiscList } from '@/api'
   import { playListMixin } from '@/mixins'
+  import loading from '@/components/loading.vue'
 
 	export default {
     mixins: [playListMixin],
   	name: 'recommend',
+    components: {
+      loading
+    },
     data(){
       return {
         slider: [],
