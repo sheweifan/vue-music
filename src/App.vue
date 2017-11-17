@@ -9,7 +9,7 @@
 </template>
 
 <script>
-	import '../static/css/reset.css'
+	import '@/static/css/reset.css'
   import appTab from '@/container/app/app-tab.vue'
   import player from '@/container/player'
   import playList from '@/container/play-list'
