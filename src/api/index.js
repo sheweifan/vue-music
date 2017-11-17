@@ -1,22 +1,24 @@
 import axios from 'axios'
 
+const prefix = 'http://vmusicapi.duapp.com'
+
 // recommend
 export function getRecommend(){
-  const url = '/api/getRecommend'
+  const url = prefix + '/api/getRecommend'
   return axios.get(url).then((res) => {
     return Promise.resolve(res.data)
   })
 }
 
 export function getDiscList(){
-  const url = '/api/getDiscList'
+  const url = prefix + '/api/getDiscList'
   return axios.get(url).then((res) => {
     return Promise.resolve(res.data)
   })
 }
 
 export function getSongList(disstid){
-  const url = '/api/getSongList'
+  const url = prefix + '/api/getSongList'
   return axios.get(url, {
     params: {
       disstid
@@ -28,14 +30,14 @@ export function getSongList(disstid){
 
 // rank
 export function getTopList(){
-  const url = '/api/getTopList'
+  const url = prefix + '/api/getTopList'
   return axios.get(url).then((res) => {
     return Promise.resolve(res.data)
   })
 }
 
 export function getMusicList(topid){
-  const url = '/api/getMusicList'
+  const url = prefix + '/api/getMusicList'
   return axios.get(url, {
     params: {
       topid
@@ -47,7 +49,7 @@ export function getMusicList(topid){
 
 // search
 export function getHotKey(){
-  const url = '/api/getHotKey'
+  const url = prefix + '/api/getHotKey'
   return axios.get(url, {
   }).then((res) => {
     return Promise.resolve(res.data)
@@ -55,7 +57,7 @@ export function getHotKey(){
 }
 
 export function search(query, page, zhida, perpage = 20){
-  const url = '/api/search'
+  const url = prefix + '/api/search'
   return axios.get(url, {
     params: {
       w: query,
@@ -71,7 +73,7 @@ export function search(query, page, zhida, perpage = 20){
 
 // singer
 export function getSingerList(){
-  const url = '/api/getSingerList'
+  const url = prefix + '/api/getSingerList'
   return axios.get(url, {
   }).then((res) => {
     return Promise.resolve(res.data)
@@ -79,7 +81,7 @@ export function getSingerList(){
 }
 
 export function getSingerDetail(singermid){
-  const url = '/api/getSingerDetail'
+  const url = prefix + '/api/getSingerDetail'
   return axios.get(url, {
     params: {
       singermid
@@ -91,7 +93,7 @@ export function getSingerDetail(singermid){
 
 // singer
 export function getLyric(songmid){
-  const url = '/api/getLyric'
+  const url = prefix + '/api/getLyric'
   return axios.get(url, {
     params: {
       songmid
