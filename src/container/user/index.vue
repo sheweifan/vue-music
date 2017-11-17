@@ -106,7 +106,7 @@
     created(){
       // 显示有内容的列表
       const index = _findIndex(this.tabs, item => this[item.listName].length > 0)
-      this.tabActive = index || 0
+      this.tabActive = index === -1 ? 0 : index
     }
   }
 </script>
