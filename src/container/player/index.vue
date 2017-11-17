@@ -74,7 +74,7 @@
   import {mapGetters, mapActions} from 'vuex'
   import vueSlider from 'vue-slider-component'
   import _isEqual from 'lodash/isEqual'
-  import _findIndex from 'lodash/findIndex'
+  import _findLastIndex from 'lodash/findLastIndex'
   import icon from '@/components/icon'
   import scrollView from '@/components/scroll-view'
   import { getLyric } from '@/api'
@@ -135,10 +135,10 @@
       lyricIndex(){
         const nowTime = this.nowTime
         const lyric = this.lyric
-        const idx = _findIndex(lyric, function(item, index){
-          return item.time > nowTime
+        let idx = _findLastIndex(lyric, function(item, index){
+          return nowTime > item.time
         })
-        return Math.max(0, idx - 1)
+        return Math.max(0, idx)
       },
       ...mapGetters([
         'playList',
@@ -305,6 +305,8 @@
           return
         }
         this.$nextTick(() => {
+          if (this.lastLyricIndex === this.lyricIndex) return
+          this.lastLyricIndex = this.lyricIndex
           const lyric = this.$refs.lyric
           const oft = lyric.$el.querySelectorAll('.lyric-item')[this.lyricIndex].offsetTop
           const activeItemH = lyric.$el.querySelector('.lyric-item.active').offsetHeight
