@@ -36,7 +36,6 @@ export const listPlay = ({commit, state}, {list, mode = playMode.order}) => {
     newList = _shuffle(list)
   }
   (mode !== state.playMode) && commit(types.SET_PLAY_MODE, mode)
-  console.log(newList, mode)
   commit(types.SET_PLAY_LIST, newList)
   commit(types.SET_NOMINAL_LIST, list)
   commit(types.SET_PLAY_INDEX, 0)
