@@ -19,7 +19,7 @@
 
 <script>
   import icon from './icon.vue'
-  import { debounce } from 'lodash'
+  import _debounce from 'lodash/debounce'
 
   export default {
     name: 'search-bar',
@@ -51,7 +51,7 @@
       }
     },
     created(){
-      this.$watch('currentValue', debounce((val) => {
+      this.$watch('currentValue', _debounce((val) => {
         this.$emit('input', val)
       }, 300))
     },

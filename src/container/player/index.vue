@@ -71,7 +71,7 @@
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
+  import { mapGetters, mapActions } from 'vuex'
   import vueSlider from 'vue-slider-component'
   import _isEqual from 'lodash/isEqual'
   import _findLastIndex from 'lodash/findLastIndex'
