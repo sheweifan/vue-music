@@ -10,6 +10,7 @@
 <script>
   import tabbar from '@/components/tabbar.vue'
   import icon from '@/components/icon.vue'
+  
   export default {
     name: 'app',
     components: {

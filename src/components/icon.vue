@@ -5,6 +5,7 @@
 
 <script>
   import '@/static/js/iconfont.js'
+  
   export default {
     name: 'scroll-view',
     props: ['name'],

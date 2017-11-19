@@ -36,7 +36,6 @@
 <script>
   import _map from 'lodash/map'
   import _take from 'lodash/take'
-
   import { mapGetters, mapActions } from 'vuex'
   import { MessageBox } from 'mint-ui'
   import { playListMixin } from '@/mixins'
