@@ -234,11 +234,11 @@
           Toast({
             message: '出错了，自动播放下一首',
             position: 'bottom',
-            duration: 1000
+            duration: 2000
           })
           setTimeout(() => {
             this.next()
-          }, 500)
+          }, 1500)
         } else {
           Toast({
             message: '出错了，试试别的歌曲吧',
