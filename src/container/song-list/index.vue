@@ -3,7 +3,7 @@
     div.song-container
       scroll-view(
         ref="page-container"
-        :class="'song-container '+ is"
+        :class="is"
         :watchs="list"
       )
         loading(v-if="list.length === 0" height="300")
@@ -141,6 +141,7 @@
   @import '../../static/stylus/index.styl'
   .song-container
     fixed-page()
+    overflow: hidden
     .img
       height: 80vw
       overflow: hidden
