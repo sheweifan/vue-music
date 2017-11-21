@@ -1,0 +1,25 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.vmusic"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.example.vmusic"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.example.vmusic"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.example.vmusic"
+        }
+    }
+}
