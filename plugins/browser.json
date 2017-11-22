@@ -12,17 +12,8 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.example.vmusic"
-        },
-        "cordova-plugin-media": {
-            "PACKAGE_NAME": "com.example.vmusic"
         }
     },
     "dependent_plugins": {
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.example.vmusic"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.example.vmusic"
-        }
     }
 }
