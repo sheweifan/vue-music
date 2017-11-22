@@ -73,6 +73,7 @@
 <script>
   import { mapGetters, mapActions } from 'vuex'
   import vueSlider from 'vue-slider-component'
+  import { Toast } from 'mint-ui'
   import _isEqual from 'lodash/isEqual'
   import _findLastIndex from 'lodash/findLastIndex'
   import icon from '@/components/icon'
@@ -153,10 +154,10 @@
     created(){
       // 黑科技
       const f = () => {
+        console.log('play方法没有src报的错， 移动端部分浏览器没办法主动播放，必须先摸到屏幕先播放后暂停， 完成其他功能后再处理')
         this.$refs.audio.play()
         this.$refs.audio.pause()
         document.removeEventListener('touchstart', f)
-        console.log('play方法没有src报的错， 移动端部分浏览器没办法主动播放，必须先摸到屏幕先播放后暂停， 完成其他功能后再处理')
       }
       document.addEventListener('touchstart', f)
     },
@@ -229,7 +230,23 @@
         }
       },
       error(){
-        alert(1)
+        if (this.playList.length > 1) {
+          Toast({
+            message: '出错了，自动播放下一首',
+            position: 'bottom',
+            duration: 2000
+          })
+          setTimeout(() => {
+            this.next()
+          }, 1500)
+        } else {
+          Toast({
+            message: '出错了，试试别的歌曲吧',
+            position: 'bottom',
+            duration: 1000
+          })
+          this.setPlaying(false)
+        }
       },
       // 音频timeupdate方法
       timeupdate(e){
