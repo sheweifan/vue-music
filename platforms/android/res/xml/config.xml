@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.example.vmusic" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <feature name="Whitelist">
-        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
-        <param name="onload" value="true" />
-    </feature>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
     <hook src="hooks/hookers.js" type="before_prepare" />
@@ -42,6 +42,6 @@
     <splash density="land-mdpi" src="res/screen/android/screen-mdpi-landscape.png" />
     <splash density="land-xhdpi" src="res/screen/android/screen-xhdpi-landscape.png" />
     <preference name="loglevel" value="DEBUG" />
-    <preference name="SplashScreenDelay" value="3000" />
     <preference name="showsplashscreenspinner" value="false" />
+    <preference name="AutoHideSplashScreen" value="false" />
 </widget>

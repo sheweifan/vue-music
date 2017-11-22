@@ -19,6 +19,11 @@
       appTab,
       player,
       playList
+    },
+    mounted(){
+      setTimeout(() => {
+        navigator.splashscreen && navigator.splashscreen.hide()
+      }, 1000)
     }
 	}
 </script>

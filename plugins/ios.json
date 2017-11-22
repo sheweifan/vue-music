@@ -7,13 +7,14 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.example.vmusic"
-        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.example.vmusic"
         },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.example.vmusic"
+        },
         "cordova-plugin-media": {
+            "MICROPHONE_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "com.example.vmusic"
         }
     },
