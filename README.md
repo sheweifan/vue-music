@@ -3,16 +3,16 @@
 
 ## Quick start
 
-  git clone ...
-  npm i 
-  
-  cordova add browser
-  npm run dev (browser)
-  
-  cordova add android
-  npm run android (android device)
-  
-  ...other cordova task
+    git clone ...
+    npm i 
+    
+    cordova add browser
+    npm run dev (browser)
+    
+    cordova add android
+    npm run android (android device)
+    
+    ...other cordova task
 
 ## Minimum
 
