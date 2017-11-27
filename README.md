@@ -1,5 +1,6 @@
 # vue-music
 #### vue+ webpack+ cordova -> vue-music-player
+use: `vue` `vuex` `mint-ui` `pug` `stylus`
 
 ## Quick start
 
@@ -23,4 +24,3 @@
 
 ![项目总览](http://vmusicapi.duapp.com/api/qcode?url=http://vmusicapi.duapp.com "项目总览") 
 (do not open in the wechat browser)
-
