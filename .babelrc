@@ -3,14 +3,16 @@
     ["env", { "modules": false }],
     "stage-2"
   ],
-  "plugins": ["transform-runtime", 
+  "plugins": [
     ["component", [
       {
         "libraryName": "mint-ui",
         "style": true
       }
     ]],
-    "lodash"
+    "transform-runtime", 
+    "lodash",
+    "syntax-dynamic-import"
   ],
   "env": {
     "test": {
