@@ -22,5 +22,10 @@ use: `vue` `vuex` `mint-ui` `pug` `stylus`
 
 ## View demo 
 
-![项目总览](http://vmusicapi.duapp.com/api/qcode?url=http://vmusicapi.duapp.com "项目总览") 
-(do not open in the wechat browser)
+![demo](http://vmusicapi.duapp.com/api/qcode?url=http://sheweifan.duapp.com/ "demo") 
+
+## Use server api
+
+    <!--checkout /api/index.js-->
+    const apiRoutes = express.Router()
+    require('path/to/api/index')(apiRoutes)
