@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\store\actions.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/store/</a> actions.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.29% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>15/105</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.56% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>15/103</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import _shuffle from 'lodash/shuffle'
+import _findIndex from 'lodash/findIndex'
+import _clone from 'lodash/clone'
+import _isObject from 'lodash/isObject'
+import _uniqBy from 'lodash/uniqBy'
+import _filter from 'lodash/filter'
+import _concat from 'lodash/concat'
+import _isNumber from 'lodash/isNumber'
+import _take from 'lodash/take'
+import _difference from 'lodash/difference'
+&nbsp;
+import { storage } from '@/utils'
+import { playMode, constant } from '@/config'
+import * as types from './types'
+&nbsp;
+// 播放音乐
+export const play = ({commit, state}, {list, index, mode = state.playMode}) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let newList = <span class="cstat-no" title="statement not covered" >list</span>
+  let newIndex = <span class="cstat-no" title="statement not covered" >index</span>
+<span class="cstat-no" title="statement not covered" >  if (mode === playMode.random){</span>
+<span class="cstat-no" title="statement not covered" >    newList = _shuffle(list)</span>
+    const nowPlay = <span class="cstat-no" title="statement not covered" >list[index]</span>
+<span class="cstat-no" title="statement not covered" >    newIndex = _findIndex(newList, {songid: nowPlay.songid})</span>
+  }
+<span class="cstat-no" title="statement not covered" >  (mode !== state.playMode) &amp;&amp; commit(types.SET_PLAY_MODE, mode)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST, newList)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_NOMINAL_LIST, list)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_INDEX, newIndex)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_SCREEN, true)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAYING, true)</span>
+}
+&nbsp;
+export const listPlay = ({commit, state}, {list, mode = playMode.order}) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let newList = <span class="cstat-no" title="statement not covered" >list</span>
+<span class="cstat-no" title="statement not covered" >  if (mode === playMode.random){</span>
+<span class="cstat-no" title="statement not covered" >    newList = _shuffle(list)</span>
+  }
+<span class="cstat-no" title="statement not covered" >  (mode !== state.playMode) &amp;&amp; commit(types.SET_PLAY_MODE, mode)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST, newList)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_NOMINAL_LIST, list)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_INDEX, 0)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_SCREEN, true)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAYING, true)</span>
+}
+&nbsp;
+export const addPlayList = ({commit, state}, {list, index}) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let newList = <span class="cstat-no" title="statement not covered" >_concat(list, state.playList)</span>
+  let newNomoalList = <span class="cstat-no" title="statement not covered" >_concat(list, state.nominalList)</span>
+<span class="cstat-no" title="statement not covered" >  newList = _uniqBy(newList, 'songid')</span>
+  // 如果播放列表是空的，从第一条开始播放
+<span class="cstat-no" title="statement not covered" >  if (state.playList.length === 0){</span>
+<span class="cstat-no" title="statement not covered" >    index = 0</span>
+  }
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST, newList)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_NOMINAL_LIST, newNomoalList)</span>
+<span class="cstat-no" title="statement not covered" >  _isNumber(index) &amp;&amp; commit(types.SET_PLAY_INDEX, index)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_SCREEN, true)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAYING, true)</span>
+}
+&nbsp;
+export const removePlayList = ({commit, state}, data) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let {playList, playIndex, nominalList} = <span class="cstat-no" title="statement not covered" >state</span>
+  let delectList = <span class="cstat-no" title="statement not covered" >_isObject(data) ? [data] : data</span>
+  const newList = <span class="cstat-no" title="statement not covered" >_difference(playList, delectList)</span>
+  const newNnominalList = <span class="cstat-no" title="statement not covered" >_difference(nominalList, delectList)</span>
+<span class="cstat-no" title="statement not covered" >  if (playIndex === playList.length - 1){</span>
+<span class="cstat-no" title="statement not covered" >    playIndex = 0</span>
+  }
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST, newList)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_NOMINAL_LIST, newNnominalList)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_INDEX, playIndex)</span>
+}
+&nbsp;
+export const removeAllPlayList = ({commit, state}) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST, [])</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_NOMINAL_LIST, [])</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_INDEX, -1)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAYING, false)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST_CHECKING, false)</span>
+}
+&nbsp;
+// 设置是否全屏
+export const setScreen = ({commit, state}, bool) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_SCREEN, bool)</span>
+}
+&nbsp;
+// 播放暂停
+export const setPlaying = ({commit, state}, bool) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAYING, bool)</span>
+}
+&nbsp;
+// 播放歌曲index
+export const setPlayIndex = ({commit, state}, index) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_INDEX, index)</span>
+}
+&nbsp;
+// 设置播放模式
+export const setPlayMode = ({commit, state}, {mode, index = 0, list = state.nominalList}) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let newList = <span class="cstat-no" title="statement not covered" >list</span>
+  let newIndex = <span class="cstat-no" title="statement not covered" >index</span>
+<span class="cstat-no" title="statement not covered" >  if (mode === playMode.random){</span>
+    // 打乱数组
+<span class="cstat-no" title="statement not covered" >    newList = _shuffle(list)</span>
+  }
+  const nowPlay = <span class="cstat-no" title="statement not covered" >state.playList[index]</span>
+  // 重新找到正在播放的歌曲
+<span class="cstat-no" title="statement not covered" >  newIndex = _findIndex(newList, {songid: nowPlay.songid})</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_MODE, mode)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_INDEX, newIndex)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST, newList)</span>
+}
+&nbsp;
+// 查看播放列表
+export const setPlayListChecking = ({commit, state}, bool) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_LIST_CHECKING, bool)</span>
+}
+&nbsp;
+// 搜索历史
+// export const getSearchHistory = ({commit, state}) =&gt; {
+//   const list = storage.get(constant.searchHistoryStorageKey)
+//   commit(types.SET_SEARCH_HISTORY, list)
+// }
+&nbsp;
+export const addSearchHistory = ({commit, state}, data) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let list = <span class="cstat-no" title="statement not covered" >_clone(state.searchHistory)</span>
+<span class="cstat-no" title="statement not covered" >  list = [data].concat(list)</span>
+<span class="cstat-no" title="statement not covered" >  list = _uniqBy(list, 'text')</span>
+<span class="cstat-no" title="statement not covered" >  list = _take(list, 10)</span>
+<span class="cstat-no" title="statement not covered" >  storage.set(constant.searchHistoryStorageKey, list)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_SEARCH_HISTORY, list)</span>
+}
+&nbsp;
+export const removeSearchHistory = ({commit, state}, data) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let list = <span class="cstat-no" title="statement not covered" >_clone(state.searchHistory)</span>
+<span class="cstat-no" title="statement not covered" >  if (_isObject(data)){</span>
+<span class="cstat-no" title="statement not covered" >    list = _filter(list, ({text}) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >text !== data.text)</span></span></span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    list = []</span>
+  }
+<span class="cstat-no" title="statement not covered" >  storage.set(constant.searchHistoryStorageKey, list)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_SEARCH_HISTORY, list)</span>
+}
+&nbsp;
+export const addCollectHistory = ({commit, state}, data) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let list = <span class="cstat-no" title="statement not covered" >_clone(state.collectHistory)</span>
+<span class="cstat-no" title="statement not covered" >  list = [data].concat(list)</span>
+<span class="cstat-no" title="statement not covered" >  list = _uniqBy(list, 'songid')</span>
+<span class="cstat-no" title="statement not covered" >  list = _take(list, 50)</span>
+<span class="cstat-no" title="statement not covered" >  storage.set(constant.collectHistoryStorageKey, list)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_COLLECT_HISTORY, list)</span>
+}
+&nbsp;
+export const removeCollectHistory = ({commit, state}, data) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let list = <span class="cstat-no" title="statement not covered" >_clone(state.collectHistory)</span>
+<span class="cstat-no" title="statement not covered" >  if (_isObject(data)){</span>
+<span class="cstat-no" title="statement not covered" >    list = _filter(list, ({songid}) =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >songid !== data.songid)</span></span></span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    list = []</span>
+  }
+<span class="cstat-no" title="statement not covered" >  storage.set(constant.collectHistoryStorageKey, list)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_COLLECT_HISTORY, list)</span>
+}
+&nbsp;
+export const addPlayHistory = ({commit, state}, data) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+  let list = <span class="cstat-no" title="statement not covered" >_clone(state.playHistory)</span>
+<span class="cstat-no" title="statement not covered" >  list = [data].concat(list)</span>
+<span class="cstat-no" title="statement not covered" >  list = _uniqBy(list, 'songid')</span>
+<span class="cstat-no" title="statement not covered" >  list = _take(list, 50)</span>
+<span class="cstat-no" title="statement not covered" >  storage.set(constant.playHistoryStorageKey, list)</span>
+<span class="cstat-no" title="statement not covered" >  commit(types.SET_PLAY_HISTORY, list)</span>
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Dec 04 2017 16:21:54 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src\container\player\screen-animate.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">src/container/player/</a> screen-animate.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.76% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.76% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/42</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template lang="pug"&gt;
+  transition(name="screen" 
+              @enter="enter"
+              @leave="leave"
+              @after-enter="afterEnter"
+              @after-leave="afterLeave")
+    slot
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+  const getAnimateData = () =<span class="fstat-no" title="function not covered" >&gt; {</span>
+    const winW <span class="cstat-no" title="statement not covered" >= window.innerWidt</span>h
+    const winH <span class="cstat-no" title="statement not covered" >= window.innerHeigh</span>t
+    const miniLeft <span class="cstat-no" title="statement not covered" >= 1</span>0
+    const miniBottom <span class="cstat-no" title="statement not covered" >= 1</span>0
+    const miniWidth <span class="cstat-no" title="statement not covered" >= 4</span>8
+    const bigTop <span class="cstat-no" title="statement not covered" >= 6</span>5
+    const bigWidth <span class="cstat-no" title="statement not covered" >= winW * 0.</span>8
+    const x <span class="cstat-no" title="statement not covered" >= -bigWidth / 2 - miniLeft / </span>2
+    const y <span class="cstat-no" title="statement not covered" >= winH - bigTop - bigWidth / 2 - miniBottom - miniWidth / </span>2
+    const scale <span class="cstat-no" title="statement not covered" >= miniWidth / bigWidt</span>h
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      x,
+      y,
+      scale
+    }
+  }
+&nbsp;
+  const setAnimate = (el, {x, y, scale}, time = 0.3) =<span class="fstat-no" title="function not covered" >&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve, reject) =<span class="fstat-no" title="function not covered" >&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >      el.style.webkitTransition = `transform ${time}s</span>`
+<span class="cstat-no" title="statement not covered" >      el.style.transition = `transform ${time}s</span>`
+<span class="cstat-no" title="statement not covered" >      el.style.webkitTransform = `translate3d(${x}px, ${y}px, 0) scale(${scale})</span>`
+<span class="cstat-no" title="statement not covered" >      el.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})</span>`
+&nbsp;
+      // el.addEventListener('transitionend', resolve)
+<span class="cstat-no" title="statement not covered" >      setTimeout(() =<span class="fstat-no" title="function not covered" >&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        resolve(</span>)
+        // el.style.transition = ` `
+        // el.style.webkitTransition = ` `
+      }, time * 1000)
+    })
+  }
+&nbsp;
+  export default {
+    name: 'sreen-ainimate',
+    props: ['img'],
+    methods: {
+      async enter(dom, done){
+        const el <span class="cstat-no" title="statement not covered" >= this.$vnode.context.$refs[this.img</span>]
+        const opts <span class="cstat-no" title="statement not covered" >= getAnimateData(</span>)
+<span class="cstat-no" title="statement not covered" >        await setAnimate(el, opts, 0</span>)
+        const opts2 <span class="cstat-no" title="statement not covered" >= {</span>
+          x: 0,
+          y: 0,
+          scale: 1.05
+        }
+<span class="cstat-no" title="statement not covered" >        await setAnimate(el, opts2, 0.2</span>)
+        const opts3 <span class="cstat-no" title="statement not covered" >= {</span>
+          x: 0,
+          y: 0,
+          scale: 1
+        }
+<span class="cstat-no" title="statement not covered" >        await setAnimate(el, opts3, 0.05</span>)
+<span class="cstat-no" title="statement not covered" >        done(</span>)
+      },
+      async leave(dom, done){
+        const el <span class="cstat-no" title="statement not covered" >= this.$vnode.context.$refs[this.img</span>]
+        const opts <span class="cstat-no" title="statement not covered" >= getAnimateData(</span>)
+<span class="cstat-no" title="statement not covered" >        await setAnimate(el, opts, 0.3</span>)
+<span class="cstat-no" title="statement not covered" >        done(</span>)
+      },
+      afterEnter(){
+        const el <span class="cstat-no" title="statement not covered" >= this.$vnode.context.$refs[this.img</span>]
+<span class="cstat-no" title="statement not covered" >        el.style.webkitTransition = `</span>`
+<span class="cstat-no" title="statement not covered" >        el.style.transition = `</span>`
+<span class="cstat-no" title="statement not covered" >        el.style.webkitTransform = `</span>`
+<span class="cstat-no" title="statement not covered" >        el.style.transform = `</span>`
+      },
+      afterLeave(){
+        const el <span class="cstat-no" title="statement not covered" >= this.$vnode.context.$refs[this.img</span>]
+<span class="cstat-no" title="statement not covered" >        el.style.webkitTransition = `</span>`
+<span class="cstat-no" title="statement not covered" >        el.style.transition = `</span>`
+<span class="cstat-no" title="statement not covered" >        el.style.webkitTransform = `</span>`
+<span class="cstat-no" title="statement not covered" >        el.style.transform = `</span>`
+      }
+    }
+  }
+&lt;/script&gt;
+&nbsp;
+&lt;style lang="stylus" scoped&gt;
+  .screen-leave-active,
+  .screen-enter-active
+    opacity: 1
+    transition: opacity 0.3s
+    .player-head,
+    .player-control
+      transition: transform 0.3s ease-in
+  .screen-enter,
+  .screen-leave-to
+    opacity: 0
+    .player-head
+      transform: translateY(-100%) translateZ(0)
+    .player-control
+      transform: translateY(100%) translateZ(0)
+&lt;/style&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Dec 04 2017 16:21:54 GMT+0800 (中国标准时间)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
