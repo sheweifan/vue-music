@@ -6,6 +6,8 @@ use: `vue` `vuex` `mint-ui` `pug` `stylus`
 
     git clone ...
     npm i 
+
+    mkdir www
     
     cordova add browser
     npm run dev (browser)
