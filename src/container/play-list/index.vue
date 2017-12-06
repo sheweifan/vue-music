@@ -7,9 +7,8 @@
             v-for="(item, index) in playList" 
             :key="index"
             :icon=" item.songid === playSong.songid ? 'icon-1': ' ' " 
-            :btns="[{name:'collect',className: isCollected(item) ? 'active' : ''}, {name: 'delete'}]"
+            :btns="getItemBtns(item)"
             :data="item"
-            :index="index"
             @btns-click="btnsClick"
             @click="singItemClick(item, index)"
           ) {{item.songname}}
@@ -40,6 +39,19 @@
       ])
     },
     methods: {
+      getItemBtns(data){
+        return [
+          {
+            name: 'collect',
+            className: this.isCollected(data) ? 'active' : '',
+            onClick: () => this.btnsClick('collect', data)
+          },
+          {
+            name: 'delete',
+            onClick: () => this.btnsClick('delete', data)
+          }
+        ]
+      },
       btnsClick(name, item){
         if (name === 'delete'){
           this.removePlayList(item)

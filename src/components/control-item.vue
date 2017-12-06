@@ -4,7 +4,7 @@
     span.control-item-title
       slot
     span.control-item-btns(v-if="btns")
-      i(v-for="(item, index) in btns" :key="index" @click.stop="btnsClick(item.name)")
+      i(v-for="(item, index) in btns" :key="index" @click.stop="item.onClick")
         icon(:class="'control-item-icon ' + item.name + ' ' + (item.className || ' ') " :name="getIcon(item.name)")
 </template>
 
@@ -16,7 +16,22 @@
     components: {
       icon
     },
-    props: ['data', 'icon', 'index', 'btns', 'index'],
+    props: {
+      icon: String,
+      btns: {
+        type: Object,
+        default(){
+          return {
+            name: {
+              type: String,
+              required: true
+            },
+            className: String,
+            onClick: Function
+          }
+        }
+      }
+    },
     methods: {
       getIcon(name){
         switch (name){
@@ -25,14 +40,11 @@
           case 'delete':
             return 'guanbi'
           default :
-            return ' '
+            return name
         }
       },
       itemClick(){
         this.$emit('click')
-      },
-      btnsClick(name){
-        this.$emit('btns-click', name, this.data, this.index)
       }
     }
   }
