@@ -4,7 +4,6 @@
 //   https://github.com/webpack/karma-webpack
 
 var webpackConfig = require('../../webpack/webpack.test.config')
-console.log(JSON.stringify(webpackConfig))
 module.exports = function (config) {
   config.set({
     // to run in additional browsers:
