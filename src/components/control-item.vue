@@ -1,6 +1,6 @@
 <template lang="pug">
   div.control-item(@click="itemClick")
-    icon.control-item-icon(:name="icon" v-if="icon")
+    icon.control-item-icon.left-icon(:name="icon" v-if="icon")
     span.control-item-title
       slot
     span.control-item-btns(v-if="btns")
@@ -12,24 +12,14 @@
   import icon from './icon.vue'
   
   export default {
-    name: 'tag-list',
+    name: 'control-item',
     components: {
       icon
     },
     props: {
       icon: String,
       btns: {
-        type: Object,
-        default(){
-          return {
-            name: {
-              type: String,
-              required: true
-            },
-            className: String,
-            onClick: Function
-          }
-        }
+        type: Array
       }
     },
     methods: {

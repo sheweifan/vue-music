@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'tag-list',
+    name: 'song-item',
     props: ['data'],
     methods: {
       itemClick(){
