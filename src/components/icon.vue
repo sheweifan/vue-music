@@ -7,7 +7,7 @@
   import '@/static/js/iconfont.js'
   
   export default {
-    name: 'scroll-view',
+    name: 'icon',
     props: ['name'],
     methods: {
       iconclick(){

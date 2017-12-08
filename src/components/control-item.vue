@@ -3,14 +3,15 @@
     icon.control-item-icon.left-icon(:name="icon" v-if="icon")
     span.control-item-title
       slot
-    span.control-item-btns(v-if="btns")
-      i(v-for="(item, index) in btns" :key="index" @click.stop="item.onClick")
+    span.control-item-btns(v-if="buttons")
+      i(v-for="(item, index) in buttons" :key="index" @click.stop="item.onClick")
         icon(:class="'control-item-icon ' + item.name + ' ' + (item.className || ' ') " :name="getIcon(item.name)")
 </template>
 
 <script>
   import icon from './icon.vue'
-  
+  import _map from 'lodash/map'
+
   export default {
     name: 'control-item',
     components: {
@@ -20,6 +21,15 @@
       icon: String,
       btns: {
         type: Array
+      }
+    },
+    computed: {
+      buttons(){
+        if (!this.btns) return null
+        return _map(this.btns, item => ({
+          onClick: () => {},
+          ...item
+        }))
       }
     },
     methods: {
