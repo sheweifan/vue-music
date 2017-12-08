@@ -1,30 +1,32 @@
 import Vue from 'vue'
-import { createVue } from '../utils'
+import _ from 'lodash'
+import { createVue, triggerEvent } from '../utils'
 import controlItem from '@/components/control-item'
 
 Vue.component(controlItem.name, controlItem)
 
-const propsData = {
-  icon: 'collect',
-  slot: '标题',
-  btns: [
-    {
-      name: 'collect',
-      classname: 'collect',
-      onClick: () => {
-        console.log(111)
-      }
-    },
-    {
-      name: 'collect'
-    }
-  ]
-}
-
 describe('component control-item', () => {
   let clickTimes = 0
+  let clickBtnTimes = 0
+  const propsData = {
+    icon: 'collect',
+    slot: '标题',
+    btns: [
+      {
+        name: 'collect',
+        classname: 'collect',
+        onClick: () => {
+          clickBtnTimes++
+        }
+      },
+      {
+        name: 'collect'
+      }
+    ]
+  }
+
   const vm = createVue({
-    template: `<control-item 
+    template: `<control-item
       :icon="icon"
       :btns="btns"
       @click="handleClick"
@@ -53,13 +55,20 @@ describe('component control-item', () => {
     done()
   })
 
-  it('btns', done => {
+  it('btns && btns click', done => {
     const el = vm.$el.querySelector('.control-item-btns').querySelectorAll('i')
-    expect(el.length).to.equal(propsData.btns.length)
-    done()
+    _.forEach(el, item => {
+      triggerEvent(item, 'click')
+    })
+
+    setTimeout(() => {
+      expect(el.length).to.equal(propsData.btns.length)
+      expect(clickBtnTimes).to.equal(1)
+      done()
+    }, 200)
   })
 
-  it('btns', done => {
+  it('click', done => {
     const el = vm.$el
     el.click()
     setTimeout(() => {
