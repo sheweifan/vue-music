@@ -97,31 +97,31 @@ exports.triggerClick = function(elm, ...opts) {
 }
 
 // https://github.com/ustbhuangyi/better-scroll/blob/master/test/unit/utils/event.js
-export function createEvent (type, name) {
+exports.createEvent = function(type, name) {
   const e = document.createEvent(type || 'Event')
   e.initEvent(name, true, true)
   return e
 }
 
-export function dispatchTouch (target, name = 'touchstart', touches) {
+exports.dispatchTouch = function(target, name = 'touchstart', touches) {
   const event = createEvent('', name)
   event.touches = event.targetTouches = event.changedTouches = Array.isArray(touches) ? touches : [touches]
   target.dispatchEvent(event)
 }
 
-export function dispatchTouchStart (target, touches) {
+exports.dispatchTouchStart = function(target, touches) {
   dispatchTouch(target, 'touchstart', touches)
 }
 
-export function dispatchTouchMove (target, touches) {
+exports.dispatchTouchMove = function(target, touches) {
   dispatchTouch(target, 'touchmove', touches)
 }
 
-export function dispatchTouchEnd (target, touches) {
+exports.dispatchTouchEnd = function(target, touches) {
   dispatchTouch(target, 'touchend', touches)
 }
 
-export function dispatchSwipe (target, touches, duration, cb) {
+exports.dispatchSwipe = function(target, touches, duration, cb) {
   if (!Array.isArray(touches)) {
     touches = [touches]
   }
