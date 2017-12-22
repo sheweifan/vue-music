@@ -24,7 +24,7 @@ use: `vue` `vuex` `mint-ui` `pug` `stylus`
 
 ## View demo 
 
-![demo](http://vmusicapi.duapp.com/api/qcode?url=http://sheweifan.duapp.com/ "demo") 
+![demo](http://vmusicapi.duapp.com/api/qcode?url=http://vmusicapi.duapp.com/ "demo") 
 
 ## Use server api
 
