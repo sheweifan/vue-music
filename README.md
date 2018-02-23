@@ -21,14 +21,13 @@ use: `vue` `vuex` `mint-ui` `pug` `stylus`
 
 * Cordova: 6.0.0
 * Node.js: 6.5.0
-
+<!-- 
 ## View demo 
 
 ![demo](http://vmusicapi.duapp.com/api/qcode?url=http://vmusicapi.duapp.com/ "demo") 
-> 音乐播放接口异常，大部分音乐无法播放
+> 音乐播放接口异常，大部分音乐无法播放 
 
 ## Use server api
-
-    <!--checkout /api/index.js-->
     const apiRoutes = express.Router()
     require('path/to/api/index')(apiRoutes)
+-->
