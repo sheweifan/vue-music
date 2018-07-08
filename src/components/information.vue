@@ -2,15 +2,15 @@
 <div class="msg-modal-box" v-if="visable">
 	<div
 		class="modal-mask"
-		v-tap="{ methods: closeMsg }"
+		@click="closeMsgs"
     @touchstart.prevent
   >
 	</div>
 	<div :class="['modal-cont', visable ? 'move-up' : 'move-down']">
 		<div class="msg-header">
 			<h5 class="title">{{title}}</h5>
-			<span class="cancel-btn" v-tap="{ methods: closeMsg }">取消</span>
-			<span class="send-btn" v-if="msgCont.length > 0" v-tap="{ methods: sendMsg }">{{comfirmBtnText}}</span>
+			<span class="cancel-btn" @click="closeMsg">取消</span>
+			<span class="send-btn" v-if="msgCont.length > 0" @click="sendMsg">{{comfirmBtnText}}</span>
 		</div>
 		<div class="msg-wrap">
 			<textarea
