@@ -88,18 +88,21 @@ export default {
       }
     },
     _trigger() {
-      this.scrollBody.removeEventListener('scroll', this.scroll)
-      this.$emit('render', this.page, ({data, hasMore = data.length >= this.pageCount}) => {
-        this.list = [...this.list, ...data]
-        this.scrollBody.addEventListener('scroll', this.scroll)
-        this.hasMore = hasMore
+      return new Promise(resolve => {
+        this.scrollBody.removeEventListener('scroll', this.scroll)
+        this.$emit('render', this.page, ({data, hasMore = data.length >= this.pageCount}) => {
+          this.list = [...this.list, ...data]
+          this.scrollBody.addEventListener('scroll', this.scroll)
+          this.hasMore = hasMore
+          resolve()
+        })
       })
     },
     refresh() {
       this.list = []
       this.page = 1
       this.hasMore = true
-      this._trigger()
+      return this._trigger()
     }
   },
   watch: {
