@@ -1,9 +1,9 @@
 <template>
   <div class="load-more">
     <template
-      v-for="(item) in list"
+      v-for="(item, index) in list"
     >
-      <slot :item="item"/>
+      <slot :item="item" :index="index" />
     </template>
     <template v-if="hasMore">
       <slot name="loading" v-if="$slots.loading" />
