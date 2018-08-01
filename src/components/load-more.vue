@@ -7,7 +7,7 @@
     </template>
     <template v-if="hasMore">
       <slot name="loading" v-if="$slots.loading" />
-      <AnimationLoadmore :circleFm="{background: '#ff745b'}" v-else />
+      <AnimationLoadmore :circleFm="{background: theme}" v-else />
     </template>
     <template v-else>
       <template v-if="list.length === 0">
@@ -50,6 +50,10 @@ export default {
       default() {
         return window
       }
+    },
+    theme: {
+      type: String,
+      default: '#ff745b'
     }
   },
   data() {
