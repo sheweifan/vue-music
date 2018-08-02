@@ -44,7 +44,9 @@
     methods: {
       cleanValue(){
         this.currentValue = ''
-        this.$refs['input'].focus()
+        setTimeout(() => {
+          this.$refs['input'].focus()
+        }, 120)
       },
       cancelClick(){
         this.$emit('cancel-click')
