@@ -119,14 +119,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-  .load-more{
-		.no-more {
-	    width: 100%;
-	    line-height: 44px;
-	    font-size: 13px;
-	    color: #999;
-	    text-align: center;
-	  }
-  }
+<style lang="stylus" scoped>
+  .load-more
+		.no-more
+	    width: 100%
+	    line-height: 44px
+	    font-size: 13px
+	    color: #999
+	    text-align: center
 </style>
