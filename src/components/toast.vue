@@ -70,49 +70,41 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@keyframes loading {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
-
-.toast-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,.3);
-  z-index: 12;
-}
-.toast-cont{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, 0);
-  max-width: 80%;
-  background: rgba(0,0,0,0.3);
-  z-index: 12;
-  padding: 10px;
-  color: #fff;
-  font-size: 15px;
-  line-height: 20px;
-  border-radius: 10px;
-  .yxl-font{
-    margin: 0 5px;
-    display: inline-block;
-    vertical-align: middle;
-  }
-  .yxl-font-loading520{
-    font-size: 20px;
-    line-height: 20px;
-    height: 20px;
-    transform-origin: 45% 45%;
-    animation: loading 1s linear infinite;
-  }
-}
+<style lang="stylus" scoped>
+@keyframes loading
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(359deg)
+.toast-mask
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(0,0,0,.3)
+  z-index: 12
+.toast-cont
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, 0)
+  max-width: 80%
+  background: rgba(0,0,0,0.3)
+  z-index: 12
+  padding: 10px
+  color: #fff
+  font-size: 15px
+  line-height: 20px
+  border-radius: 10px
+  .yxl-font
+    margin: 0 5px
+    display: inline-block
+    vertical-align: middle
+  .yxl-font-loading520
+    font-size: 20px
+    line-height: 20px
+    height: 20px
+    transform-origin: 45% 45%
+    animation: loading 1s linear infinite
 </style>
