@@ -46,27 +46,21 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
-  .qingsu-message-list{
-    padding: 12px 15px;
-    background: #fff;
-    .qingsu-message-item{
-      display: flex;
-      padding: 12px 0;
-      font-size: 15px;
-      line-height: 21px;
-      .title{
-        // width: pxToRem(150);
-        color: #999;
-      }
-      .label{
-        flex: 1;
-        color: #333;
-        &.high {
-          color: #FF745B;
-        }
-      }
-    }
-  }
-
+<style lang="stylus" scoped>
+  @import '../static/stylus/index.styl'
+  .qingsu-message-list
+    padding: 12px 15px
+    background: #fff
+    .qingsu-message-item
+      display: flex
+      padding: 12px 0
+      font-size: 15px
+      line-height: 21px
+      .title
+        color: #999
+      .label
+        flex: 1
+        color: #333
+        &.high
+          color: #FF745B
 </style>
