@@ -67,12 +67,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "../assets/sass/config";
-@import "../assets/sass/function";
-@import "../assets/sass/mixin";
-.common-modal-box {
-	.modal-mask {
+<style lang="stylus" scoped>
+.common-modal-box
+	.modal-mask
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -80,38 +77,33 @@ export default {
 		height: 100%;
 		background-color: rgba(0,0,0,.3);
 		z-index: 12;
-	}
-	.modal-cont {
+	.modal-cont
 		position: fixed;
 		bottom: 15px;
 		left: 50%;
 		transform: translate(-50%, 0);
 		box-sizing: border-box;
-		width: pxToRem(690);
+		width: 90%;
 		background-color: #fff;
 		border-radius: 10px;
 		z-index: 12;
-
-    .title{
+    .title
       font-size: 16px;
       line-height: 22px;
       color: #333;
       padding: 13px 0;
       text-align: center;
       border-bottom: 1px solid #EAEAEA;
-    }
-    .context{
+    .context
       margin: 12px 0 9px;
       padding: 0 15px;
       max-height: 50vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-    }
-    .btns{
+    .btns
       padding: 15px 8px;
       display: flex;
-
-      .btn{
+      .btn
         flex: 1;
         margin: 0 8px;
         text-align: center;
@@ -122,12 +114,6 @@ export default {
         background: #999;
         border-radius: 5px;
         &.high,
-        &:nth-last-child(1){
+        &:nth-last-child(1)
           background: #FF745B;
-        }
-      }
-    }
-
-	}
-}
 </style>
