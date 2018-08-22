@@ -70,50 +70,50 @@ export default {
 <style lang="stylus" scoped>
 .common-modal-box
 	.modal-mask
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0,0,0,.3);
-		z-index: 12;
+		position: fixed
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%
+		background-color: rgba(0,0,0,.3)
+		z-index: 12
 	.modal-cont
-		position: fixed;
-		bottom: 15px;
-		left: 50%;
-		transform: translate(-50%, 0);
-		box-sizing: border-box;
-		width: 90%;
-		background-color: #fff;
-		border-radius: 10px;
-		z-index: 12;
+		position: fixed
+		bottom: 15px
+		left: 50%
+		transform: translate(-50%, 0)
+		box-sizing: border-box
+		width: 90%
+		background-color: #fff
+		border-radius: 10px
+		z-index: 12
     .title
-      font-size: 16px;
-      line-height: 22px;
-      color: #333;
-      padding: 13px 0;
-      text-align: center;
-      border-bottom: 1px solid #EAEAEA;
+      font-size: 16px
+      line-height: 22px
+      color: #333
+      padding: 13px 0
+      text-align: center
+      border-bottom: 1px solid #EAEAEA
     .context
-      margin: 12px 0 9px;
-      padding: 0 15px;
-      max-height: 50vh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      margin: 12px 0 9px
+      padding: 0 15px
+      max-height: 50vh
+      overflow-y: auto
+      -webkit-overflow-scrolling: touch
     .btns
-      padding: 15px 8px;
-      display: flex;
+      padding: 15px 8px
+      display: flex
       .btn
-        flex: 1;
-        margin: 0 8px;
-        text-align: center;
-        font-size: 16px;
-        line-height: 22px;
-        padding: 11px 0;
-        color: #fff;
-        background: #999;
-        border-radius: 5px;
+        flex: 1
+        margin: 0 8px
+        text-align: center
+        font-size: 16px
+        line-height: 22px
+        padding: 11px 0
+        color: #fff
+        background: #999
+        border-radius: 5px
         &.high,
         &:nth-last-child(1)
-          background: #FF745B;
+          background: #FF745B
 </style>
