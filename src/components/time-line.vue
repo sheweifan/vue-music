@@ -29,53 +29,42 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-.time-line-item {
-  line-height: 20px;
-  padding-top: 24px;
-  text-align: left;
-  position: relative;
-  &:nth-child(1){
-    padding-top: 0;
-    &:before{
-      display: none;
-    }
-  }
-  &.active{
+<style lang="stylus" scoped>
+.time-line-item
+  line-height: 20px
+  padding-top: 24px
+  text-align: left
+  position: relative
+  &:nth-child(1)
+    padding-top: 0
+    &:before
+      display: none
+  &.active
     .yxl-font-agree,
-    .title{
-      color: #FF745B;
-    }
-    &:before{
-      background: #FF745B;
-    }
-  }
-  &:before{
-    position: absolute;
-    content: "";
-    width: 1px;
-    background: #ccc;
-    top: -13px;
-    bottom: 6px;
-    left: 6px;
-  }
-  .title{
-    font-size: 14px;
-    color: #666;
-    padding-right: 10px;
-  }
-  .desc{
-    font-size: 11px;
-    color: #999;
-  }
-  .yxl-font-agree{
-    font-size: 13px;
-    color: #ccc;
-    padding-right: 20px;
-    background: #fff;
-    position: relative;
-    z-index: 1;
-  }
-}
+    .title
+      color: #FF745B
+    &:before
+      background: #FF745B
+  &:before
+    position: absolute
+    content: ""
+    width: 1px
+    background: #ccc
+    top: -13px
+    bottom: 6px
+    left: 6px
+  .title
+    font-size: 14px
+    color: #666
+    padding-right: 10px
+  .desc
+    font-size: 11px
+    color: #999
+  .yxl-font-agree
+    font-size: 13px
+    color: #ccc
+    padding-right: 20px
+    background: #fff
+    position: relative
+    z-index: 1
 </style>
