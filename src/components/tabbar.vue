@@ -1,38 +1,93 @@
-<template lang="pug">
-  div.tabbar
-    router-link.tabar-item(v-for="(item, index) in data" :key="index" v-if="item.link" tag="div" :to="item.link")
-      span.tabar-item-info {{item.name}}
+<template>
+  <div class="tab-bar-container">
+    <tab
+      :value="value"
+      :data="data"
+      :fixed="fixed"
+      @change="tabChange"
+    >
+      <!-- <template slot-scope="scope">
+        <slot name="tab-item" v-bind="scope" />
+      </template> -->
+      <template slot="left">
+        <slot name="left" />
+      </template>
+      <template slot="right">
+        <slot name="right" />
+      </template>
+    </tab>
+    <div
+      class="tab-box-container"
+      v-for="(item, index) in slots"
+      :key="index"
+      v-if="index === value"
+    >
+      <component :is="{render: () => item}"/>
+    </div>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'tabbar',
-    props: ['data']
-  }
+import Tab from './tab.vue'
+/**
+  <tabbar
+    :data="[
+      { label: '全部'},
+      { label: '待支付'},
+      { label: '待完成'}
+    ]"
+    v-model="tabActive"
+  >
+    <!-- <div slot="tab-item" slot-scope="scope">
+      {{scope.item.label}}
+    </div> -->
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </tabbar>
+ */
+export default {
+  name: 'Tabbar',
+  components: {
+    Tab
+  },
+  props: {
+    data: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    value: {
+      type: [String, Number],
+      required: true
+    },
+    fixed: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    tabChange(index) {
+      this.$emit('input', index)
+    }
+  },
+  // watch: {
+  //   value(val, oldVal) {
+  //     if (val === oldVal) return
+  //     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+  //     this.boxScrollTops = this.boxScrollTops || new Array(this.data.length).fill(0)
+  //     this.boxScrollTops[this.value] = scrollTop
+  //   }
+  // },
+  computed: {
+    slots() {
+      return (this.$slots.default || []).filter(item => item.text !== ' ')
+    }
+  },
+  // updated() {
+  //   console.log('update')
+  //   // window.scrollTo(0, this.boxScrollTops[this.value])
+  // }
+}
 </script>
-
-<style lang="stylus" scoped>
-  @import '../static/stylus/index.styl'
-  .tabbar
-    display: flex
-    background-color: #fff
-    // position: relative
-    // &:before
-    //   sethalfborderbottom()
-      
-  .tabar-item
-    flex: 1
-    display: flex
-    justify-content: center
-    align-items: center
-    &.router-link-active 
-      .tabar-item-info
-        color: $color
-        transform: scale(1.05)
-        // font-weight: bold
-  .tabar-item-info
-    color: #666
-    font-size: $fontSize
-    line-height: 2
-    padding: $spacing 0;
-</style>
