@@ -29,38 +29,30 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="stylus" scoped>
 	.page-out-enter-active,
 	.page-out-leave-active,
 	.page-in-enter-active,
-	.page-in-leave-active {
-		will-change: transform;
-		transition: all 250ms;
-		height: 100%;
-		width: 100%;
-		top: 0;
-		position: absolute;
-		backface-visibility: hidden;
-		perspective: 1000;
-	}
+	.page-in-leave-active
+		will-change: transform
+		transition: all 250ms
+		height: 100%
+		width: 100%
+		top: 0
+		position: absolute
+		backface-visibility: hidden
+		perspective: 1000
+	.page-out-enter
+		opacity: 0
+		transform: translate3d(-100%, 0, 0)
+	.page-out-leave-active
+		opacity: 0
+		transform: translate3d(100%, 0, 0)
+	.page-in-enter
+		opacity: 0
+		transform: translate3d(100%, 0, 0)
+	.page-in-leave-active
+		opacity: 0
+		transform: translate3d(-100%, 0, 0)
 
-	.page-out-enter {
-		opacity: 0;
-		transform: translate3d(-100%, 0, 0);
-	}
-
-	.page-out-leave-active {
-		opacity: 0;
-		transform: translate3d(100%, 0, 0);
-	}
-
-	.page-in-enter {
-		opacity: 0;
-		transform: translate3d(100%, 0, 0);
-	}
-
-	.page-in-leave-active {
-		opacity: 0;
-		transform: translate3d(-100%, 0, 0);
-	}
 </style>
