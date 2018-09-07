@@ -54,9 +54,18 @@ export default {
   },
   methods: {
     handleClick(obj) {
-      const { index } = obj
-      typeof this.buttons[index].onClick === 'function' && this.buttons[index].onClick()
-      this.$emit('close', this.buttons[index], index)
+      const { index,type } = obj
+      const close = () => this.$emit('close', this.buttons[index], index,type)
+
+      let result = true
+      //对应button的回调执行
+      if (typeof this.buttons[index].onClick === 'function') {
+        result = this.buttons[index].onClick(close)
+      }
+
+      if (result) {
+        close()
+      }
     }
   }
 }
