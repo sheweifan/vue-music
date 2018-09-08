@@ -60,7 +60,8 @@ export default {
       let result = true
       //对应button的回调执行
       if (typeof this.buttons[index].onClick === 'function') {
-        result = this.buttons[index].onClick(close)
+        const _result = this.buttons[index].onClick(close)
+        result = _result === false ? true : false
       }
 
       if (result) {
